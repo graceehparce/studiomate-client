@@ -8,6 +8,11 @@ export const TeacherNav = () => {
         <ul className="navbar">
             {
                 <li className="navbar__item active">
+                    <Link className="navbar__link" to="/teacher">My Profile</Link>
+                </li>
+            }
+            {
+                <li className="navbar__item active">
                     <Link className="navbar__link" to="/students">Home</Link>
                 </li>
             }
