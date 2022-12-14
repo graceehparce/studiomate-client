@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { getInvoices } from "../managers/InvoiceManager"
+import { getStudent } from "../managers/StudentManager"
 
 export const InvoicesList = () => {
     const [invoices, setInvoices] = useState([])
+    const [student, setStudent] = useState({})
     const { studentId } = useParams()
     const navigate = useNavigate()
 
@@ -14,11 +16,17 @@ export const InvoicesList = () => {
         getInvoices(studentId).then(data => setInvoices(data))
     }, [])
 
+    useEffect(() => {
+        getStudent(studentId).then(data => setStudent(data))
+    }, [])
+
 
 
     return (
         <article>
-            <h1>These are your student's invoices:</h1>
+            <h1>{student.full_name}'s invoices:</h1>
+            <img className="student_img" src={student.img} alt=""></img>
+
             {
                 invoices.map(invoice => {
                     return <section key={`assignment--${invoice.id}`} className="invoice">

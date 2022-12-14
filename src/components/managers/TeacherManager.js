@@ -34,3 +34,14 @@ export const updateTeacher = (teacher) => {
         body: JSON.stringify(teacher)
     })
 }
+
+export const getMyTeacher = (studentId) => {
+
+    return fetch(`http://localhost:8000/teachers?student=${studentId}`, {
+        headers: {
+            "Authorization": `Token ${SMTokenObject.token}`
+        }
+    })
+        .then(response => response.json())
+
+}

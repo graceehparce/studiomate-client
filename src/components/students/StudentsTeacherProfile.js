@@ -1,15 +1,14 @@
 import React, { useEffect } from "react"
 import { useState } from "react"
-import { getTeacher } from "../managers/TeacherManager"
-import { useNavigate } from "react-router-dom"
-import { Link } from "react-router-dom"
+import { getMyTeacher, getTeacher } from "../managers/TeacherManager"
+import { Link, useParams } from "react-router-dom"
 
-export const TeacherProfile = () => {
+export const StudentsTeacherProfile = () => {
     const [teacher, setTeacher] = useState({})
-    const navigate = useNavigate()
+    const { studentId } = useParams()
 
     useEffect(() => {
-        getTeacher().then(data => setTeacher(data[0]))
+        getMyTeacher(studentId).then(data => setTeacher(data[0]))
     }, [])
 
 
@@ -25,17 +24,7 @@ export const TeacherProfile = () => {
                     <li className="navbar__item active">
                         <Link className="navbar__link" to={`/resources/${teacher.id}`}>Resources</Link>
                     </li>
-                    <li>
-                        <Link className="navbar__link" to={`/students`}>Studio</Link>
-                    </li>
-                    <li>
-                        <Link className="navbar__link" to={`/lessons`}>Upcoming Lessons</Link>
-                    </li>
                 </ul>
-                <button className="edit__game"
-                    onClick={() => {
-                        navigate({ pathname: `/editProfileForm/${teacher.id}` })
-                    }}>Edit Profile</button>
             </section>
         </article>
     )

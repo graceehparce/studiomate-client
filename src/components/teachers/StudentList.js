@@ -19,7 +19,7 @@ export const StudentList = () => {
             {
                 students.map(student => {
                     return <section key={`student--${student.id}`} className="student">
-                        <img className="student_ing" src={student.img} alt=""></img>
+                        <img className="student_img" src={student.img} alt=""></img>
                         <div className="student_name">{student.full_name}</div>
                         <div className="student_phone">Phone: {student.phone_number}</div>
                         <div className="student_email">Email: {student.email}</div>

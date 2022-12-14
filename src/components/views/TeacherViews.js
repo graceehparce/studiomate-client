@@ -10,7 +10,10 @@ import { EditProfileForm } from "../teachers/EditProfileForm"
 import { InvoiceForm } from "../teachers/InvoiceForm"
 import { InvoiceProfile } from "../teachers/InvoiceProfile"
 import { InvoicesList } from "../teachers/InvoicesList"
-
+import { MessagesByTeacher } from "../teachers/Messages"
+import { ResourceList } from "../teachers/ResourceList"
+import { LessonsList } from "../teachers/LessonsList"
+import { StudentLessonList } from "../teachers/StudentLessonList"
 
 export const TeacherViews = () => {
     return (
@@ -33,6 +36,14 @@ export const TeacherViews = () => {
                 <Route path="/invoices/:studentId" element={<InvoicesList />} />
                 <Route path="/invoice/:invoiceId" element={<InvoiceProfile />} />
                 <Route path="/invoiceForm/:studentId" element={<InvoiceForm />} />
+                <Route path="/messages/:studentId" element={<MessagesByTeacher />} />
+                <Route path="/resources/:teacherId" element={<ResourceList />} />
+                <Route path="/lessons" element={<LessonsList />} />
+                <Route path="/lessons/:studentId" element={<StudentLessonList />} />
+
+
+
+
 
 
 

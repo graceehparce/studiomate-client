@@ -1,6 +1,7 @@
 import React from "react"
 import { StudentProfile } from "../students/StudentProfile"
 import { Outlet, Route, Routes } from "react-router-dom"
+import { StudentsTeacherProfile } from "../students/StudentsTeacherProfile"
 
 
 export const StudentViews = () => {
@@ -14,7 +15,9 @@ export const StudentViews = () => {
                     <Outlet />
                 </>
             }>
-                <Route path="students/:studentId" element={<StudentProfile />} />
+                <Route path="myStudentProfile/:studentId" element={<StudentProfile />} />
+                <Route path="teacher/:studentId" element={<StudentsTeacherProfile />} />
+
 
             </Route>
         </Routes>

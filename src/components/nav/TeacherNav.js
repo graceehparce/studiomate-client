@@ -4,6 +4,7 @@ import "./NavBar.css"
 export const TeacherNav = () => {
     const navigate = useNavigate()
 
+
     return (
         <ul className="navbar">
             {

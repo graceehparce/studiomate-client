@@ -4,9 +4,12 @@ import { useNavigate } from "react-router-dom"
 import { getAssignments } from "../managers/AssignmentManager"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
+import { getStudent } from "../managers/StudentManager"
 
 export const AssignmentList = () => {
     const [assignments, setAssignments] = useState([])
+    const [student, setStudent] = useState({})
+
     const { studentId } = useParams()
     const navigate = useNavigate()
 
@@ -14,11 +17,18 @@ export const AssignmentList = () => {
         getAssignments(studentId).then(data => setAssignments(data))
     }, [])
 
+    useEffect(() => {
+        getStudent(studentId).then(data => setStudent(data))
+    }, [])
+
+
+
 
 
     return (
         <article>
-            <h1>These are your student's assignments:</h1>
+            <h1>{student.full_name}'s assignments:</h1>
+            <img className="student_img" src={student.img} alt=""></img>
             {
                 assignments.map(assignment => {
                     return <section key={`assignment--${assignment.id}`} className="assignment">
