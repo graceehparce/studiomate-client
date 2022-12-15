@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useState } from "react"
-import { getMyTeacher, getTeacher } from "../managers/TeacherManager"
+import { getMyTeacher } from "../managers/TeacherManager"
 import { Link, useParams } from "react-router-dom"
 
 export const StudentsTeacherProfile = () => {
@@ -20,11 +20,12 @@ export const StudentsTeacherProfile = () => {
                 <div className="teacher_name">{teacher.full_name}</div>
                 <div className="teacher_phone">Phone: {teacher.phone_number}</div>
                 <div className="teacher_email">Email: {teacher.email}</div>
-                <ul>
-                    <li className="navbar__item active">
-                        <Link className="navbar__link" to={`/resources/${teacher.id}`}>Resources</Link>
-                    </li>
-                </ul>
+                <li className="navbar__item active">
+                    <Link className="navbar__link" to={`/resources/${teacher.id}`}>Resources</Link>
+                </li>
+                <li className="navbar__item active">
+                    <Link className="navbar__link" to={`/studentMessages/${teacher.id}`}>Messages</Link>
+                </li>
             </section>
         </article>
     )

@@ -7,6 +7,8 @@ import { getInvoices } from "../managers/InvoiceManager"
 import { getStudent } from "../managers/StudentManager"
 
 export const InvoicesList = () => {
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
     const [invoices, setInvoices] = useState([])
     const [student, setStudent] = useState({})
     const { studentId } = useParams()
@@ -34,10 +36,21 @@ export const InvoicesList = () => {
                     </section>
                 })
             }
-            <button className="new_invoice"
-                onClick={() => {
-                    navigate({ pathname: `/invoiceForm/${studentId}` })
-                }}>Create New Invoice</button>
+            {
+                SMTokenObject.is_staff === true
+                    ?
+
+                    <button className="new_invoice"
+                        onClick={() => {
+                            navigate({ pathname: `/invoiceForm/${studentId}` })
+                        }}>Create New Invoice</button>
+                    :
+                    ""
+
+            }
         </article>
+
     )
+
 }
+

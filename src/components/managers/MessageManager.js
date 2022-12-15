@@ -10,6 +10,24 @@ export const getMessages = (studentId) => {
         .then(response => response.json())
 }
 
+export const getMessagesByTeacher = (teacherId) => {
+    return fetch(`http://localhost:8000/messages?teacher=${teacherId}`, {
+        headers: {
+            "Authorization": `Token ${SMTokenObject.token}`
+        }
+    })
+        .then(response => response.json())
+}
+
+export const getMessagesByStudent = (studentId) => {
+    return fetch(`http://localhost:8000/messages?student=${studentId}`, {
+        headers: {
+            "Authorization": `Token ${SMTokenObject.token}`
+        }
+    })
+        .then(response => response.json())
+}
+
 export const createMessage = (event) => {
     return fetch("http://localhost:8000/messages", {
         method: "POST",

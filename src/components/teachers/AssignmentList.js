@@ -9,6 +9,8 @@ import { getStudent } from "../managers/StudentManager"
 export const AssignmentList = () => {
     const [assignments, setAssignments] = useState([])
     const [student, setStudent] = useState({})
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
 
     const { studentId } = useParams()
     const navigate = useNavigate()
@@ -36,10 +38,18 @@ export const AssignmentList = () => {
                     </section>
                 })
             }
-            <button className="new_assignment"
-                onClick={() => {
-                    navigate({ pathname: `/assignmentForm/${studentId}` })
-                }}>Create New Assignment</button>
+
+            {
+                SMTokenObject.is_staff === true
+                    ?
+
+                    <button className="new_assignment"
+                        onClick={() => {
+                            navigate({ pathname: `/assignmentForm/${studentId}` })
+                        }}>Create New Assignment</button>
+                    :
+                    ""
+            }
         </article>
     )
 }

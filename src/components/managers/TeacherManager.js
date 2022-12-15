@@ -11,6 +11,15 @@ export const getTeachers = () => {
         .then(response => response.json())
 }
 
+export const getSingleTeacher = (teacherId) => {
+    return fetch(`http://localhost:8000/teachers/${teacherId}`, {
+        headers: {
+            "Authorization": `Token ${SMTokenObject.token}`
+        }
+    })
+        .then(response => response.json())
+}
+
 export const getTeacher = () => {
 
     return fetch(`http://localhost:8000/teachers?status=myProfile`, {

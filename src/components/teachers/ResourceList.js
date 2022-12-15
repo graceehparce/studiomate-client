@@ -2,11 +2,13 @@ import React, { useEffect } from "react"
 import { useState } from "react"
 import { createResource, deleteResource, getResources } from "../managers/ResourceManager"
 import { useParams } from "react-router-dom"
-import { getTeacher } from "../managers/TeacherManager"
+import { getSingleTeacher } from "../managers/TeacherManager"
 
 export const ResourceList = () => {
     const [resources, setResources] = useState([])
     const [teacher, setTeacher] = useState({})
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
     const [showForm, setShowForm] = useState(false)
     const { teacherId } = useParams()
     const [newResource, setNewResource] = useState({
@@ -23,7 +25,7 @@ export const ResourceList = () => {
     }, [])
 
     useEffect(() => {
-        getTeacher().then(data => setTeacher(data[0]))
+        getSingleTeacher(teacherId).then(data => setTeacher(data))
     }, [])
 
 
@@ -58,7 +60,15 @@ export const ResourceList = () => {
                     </section>
                 })
             }
-            <button onClick={() => setShowForm(!showForm)}>Add New Resource</button>
+            {
+                SMTokenObject.is_staff === true
+                    ?
+
+                    <button onClick={() => setShowForm(!showForm)}>Add New Resource</button>
+
+                    :
+                    ""
+            }
             {
                 showForm
                     ?

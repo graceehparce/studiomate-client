@@ -22,7 +22,7 @@ export const StudentNav = () => {
             }
             {
                 <li className="navbar__item active">
-                    <Link className="navbar__link" to={`/myStudentProfile/${student.id}`}>Home</Link>
+                    <Link className="navbar__link" to={`/myStudentProfile`}>Home</Link>
                 </li>
             }
             {
