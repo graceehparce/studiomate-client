@@ -3,10 +3,10 @@ import { Link, useNavigate } from "react-router-dom"
 import { registerUser } from "../managers/AuthManager"
 
 export const RegisterTeacher = () => {
-    const firstName = useRef()
-    const lastName = useRef()
+    const first_name = useRef()
+    const last_name = useRef()
     const username = useRef()
-    const phoneNumber = useRef()
+    const phone_number = useRef()
     const email = useRef()
     const password = useRef()
     const img = useRef()
@@ -21,9 +21,9 @@ export const RegisterTeacher = () => {
             const newUser = {
                 "username": username.current.value,
                 "email": email.current.value,
-                "firstName": firstName.current.value,
-                "lastName": lastName.current.value,
-                "phoneNumber": phoneNumber.current.value,
+                "first_name": first_name.current.value,
+                "last_name": last_name.current.value,
+                "phone_number": phone_number.current.value,
                 "password": password.current.value,
                 "img": img.current.value
             }
@@ -51,12 +51,12 @@ export const RegisterTeacher = () => {
             <form className="form--login" onSubmit={handleRegister}>
                 <h1 className="h3 mb-3 font-weight-normal">Register an account</h1>
                 <fieldset>
-                    <label htmlFor="firstName"> First Name </label>
-                    <input ref={firstName} type="text" name="firstName" className="form-control" placeholder="First name" required autoFocus />
+                    <label htmlFor="first_name"> First Name </label>
+                    <input ref={first_name} type="text" name="first_name" className="form-control" placeholder="First name" required autoFocus />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="lastName"> Last Name </label>
-                    <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last name" required />
+                    <label htmlFor="last_name"> Last Name </label>
+                    <input ref={last_name} type="text" name="last_name" className="form-control" placeholder="Last name" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputUsername">Username</label>
@@ -72,7 +72,7 @@ export const RegisterTeacher = () => {
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputPhoneNumber">Phone Number</label>
-                    <input ref={phoneNumber} type="text" name="phoneNumber" className="form-control" placeholder="Phone number" required />
+                    <input ref={phone_number} type="text" name="phone_number" className="form-control" placeholder="Phone number" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputPassword"> Password </label>

@@ -3,9 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { createInvoice } from "../managers/InvoiceManager"
 
 export const InvoiceForm = () => {
-
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
     const { studentId } = useParams()
     const navigate = useNavigate()
+
+    const notification = {
+        notification_type: 2
+    }
 
     const [currentInvoice, setCurrentInvoice] = useState({
         student: studentId,
@@ -14,6 +19,19 @@ export const InvoiceForm = () => {
         amount: "",
         comment: ""
     })
+
+    const createInvoiceNotification = (notification) => {
+        return fetch(`http://localhost:8000/notifications?student=${studentId}`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Token ${SMTokenObject.token}`,
+                'Accept': 'application/json',
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(notification)
+        })
+    }
+
 
 
     const changeInvoiceState = (domEvent) => {
@@ -74,6 +92,7 @@ export const InvoiceForm = () => {
                     }
 
                     createInvoice(invoice)
+                        .then(() => createInvoiceNotification(notification))
                         .then(() => navigate(`/invoices/${studentId}`))
                 }}
                 className="btn btn-primary">Create</button>

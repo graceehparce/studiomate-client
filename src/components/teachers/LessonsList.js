@@ -11,8 +11,6 @@ export const LessonsList = () => {
 
 
 
-
-
     return (
         <article>
             <h1>Upcoming Lessons</h1>

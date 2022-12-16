@@ -8,6 +8,7 @@ import { ResourceList } from "../teachers/ResourceList"
 import { InvoiceProfile } from "../teachers/InvoiceProfile"
 import { AssignmentList } from "../teachers/AssignmentList"
 import { MessagesByStudent } from "../students/StudentMessages"
+import { StudentLessonList } from "../teachers/StudentLessonList"
 
 export const StudentViews = () => {
     return (
@@ -28,6 +29,8 @@ export const StudentViews = () => {
                 <Route path="/invoice/:invoiceId" element={<InvoiceProfile />} />
                 <Route path="/assignments/:studentId" element={<AssignmentList />} />
                 <Route path="/studentMessages/:teacherId" element={<MessagesByStudent />} />
+                <Route path="/lessons/:studentId" element={<StudentLessonList />} />
+
 
 
 

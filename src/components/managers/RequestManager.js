@@ -31,3 +31,14 @@ export const createRequest = (event) => {
     })
         .then(response => response.json())
 }
+
+export const deleteRequest = (requestId) => {
+    return fetch(`http://localhost:8000/requests/${requestId}`, {
+        method: "DELETE",
+        headers: {
+            'Accept': 'application/json',
+            "Content-Type": "application/json",
+            "Authorization": `Token ${SMTokenObject.token}`
+        }
+    })
+}

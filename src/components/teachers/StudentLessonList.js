@@ -4,8 +4,11 @@ import { useParams } from "react-router-dom"
 import { getStudent } from "../managers/StudentManager"
 import { getStudentLessons } from "../managers/RequestManager"
 import { createRequest } from "../managers/RequestManager"
+import { deleteRequest } from "../managers/RequestManager"
 
 export const StudentLessonList = () => {
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
     const [lessons, setLessons] = useState([])
     const [student, setStudent] = useState({})
     const [showForm, setShowForm] = useState(false)
@@ -30,6 +33,18 @@ export const StudentLessonList = () => {
         setNewRequest(request)
     }
 
+    const updateRequest = (request) => {
+        return fetch(`http://localhost:8000/requests/${request.id}`, {
+            method: "PUT",
+            headers: {
+                "Authorization": `Token ${SMTokenObject.token}`,
+                'Accept': 'application/json',
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(request)
+        })
+    }
+
 
     return (
         <article>
@@ -51,14 +66,54 @@ export const StudentLessonList = () => {
             {
                 lessons.map(lesson => {
                     if (lesson.accepted === false) {
-                        return <div>Lesson on {lesson.date} at {lesson.time}</div>
+
+                        if (SMTokenObject.is_staff === true) {
+
+                            return <div>Lesson on {lesson.date} at {lesson.time}</div>
+                        }
+                        else {
+                            return <div>
+                                <div>Lesson on {lesson.date} at {lesson.time}</div>
+                                <button type="submit"
+                                    onClick={evt => {
+                                        evt.preventDefault()
+
+                                        const acceptedRequest = {
+                                            id: lesson.id,
+                                            accepted: true
+                                        }
+
+                                        updateRequest(acceptedRequest)
+                                            .then(() => window.location.reload())
+                                    }}
+                                    className="btn btn-primary">Accept</button>
+                                <button type="submit"
+                                    onClick={evt => {
+                                        evt.preventDefault()
+
+                                        deleteRequest(lesson.id)
+                                            .then(() => window.location.reload())
+                                    }}
+                                    className="btn btn-primary">Decline</button>
+                            </div>
+                        }
                     }
                     else {
                         return ""
                     }
                 })
             }
-            <button onClick={() => setShowForm(!showForm)}>Send Lesson Request</button>
+
+            {
+                SMTokenObject.is_staff === true
+                    ?
+
+                    <button onClick={() => setShowForm(!showForm)}>Send Lesson Request</button>
+
+                    :
+                    ""
+
+            }
             {
                 showForm
                     ?

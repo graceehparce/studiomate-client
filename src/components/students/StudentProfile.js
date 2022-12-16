@@ -31,6 +31,9 @@ export const StudentProfile = () => {
                 <li className="navbar__item active">
                     <Link className="navbar__link" to={`/invoices/${student.id}`}>Invoices</Link>
                 </li>
+                <li className="navbar__item active">
+                    <Link className="navbar__link" to={`/lessons/${student.id}`}>Schedule</Link>
+                </li>
 
             </section>
         </article>

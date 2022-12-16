@@ -76,7 +76,7 @@ export const MessagesByTeacher = () => {
 
                         const message = {
                             content: currentMessage.content,
-                            recipient: student.user
+                            recipient: student.user.id
                         }
 
                         createMessage(message)
