@@ -8,19 +8,21 @@ import { getTeacher } from "../managers/TeacherManager"
 import { createMessage } from "../managers/MessageManager"
 
 export const MessagesByTeacher = () => {
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
     const [messages, setMessages] = useState([])
     const [student, setStudent] = useState({})
     const [teacher, setTeacher] = useState({})
-
     const { studentId } = useParams()
     const navigate = useNavigate()
-
+    const notification = {
+        notification_type: 1
+    }
     const [currentMessage, setCurrentMessage] = useState({
         content: "",
         recipient: 0
 
     })
-
 
     const changeMessageState = (domEvent) => {
         const newMessage = Object.assign({}, currentMessage)
@@ -40,10 +42,17 @@ export const MessagesByTeacher = () => {
         getTeacher().then(data => setTeacher(data[0]))
     }, [])
 
-
-
-
-
+    const createMessageNotification = (notification) => {
+        return fetch(`http://localhost:8000/notifications?student=${studentId}`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Token ${SMTokenObject.token}`,
+                'Accept': 'application/json',
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(notification)
+        })
+    }
 
 
     return (
@@ -80,6 +89,7 @@ export const MessagesByTeacher = () => {
                         }
 
                         createMessage(message)
+                            .then(() => createMessageNotification(notification))
                             .then(() => window.location.reload())
                     }}
                     className="btn btn-primary">Send</button>

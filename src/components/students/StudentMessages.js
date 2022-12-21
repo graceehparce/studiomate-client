@@ -10,7 +10,11 @@ export const MessagesByStudent = () => {
     const [messages, setMessages] = useState([])
     const [student, setStudent] = useState({})
     const [teacher, setTeacher] = useState({})
-
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
+    const notification = {
+        notification_type: 1
+    }
     const { teacherId } = useParams()
 
     const [currentMessage, setCurrentMessage] = useState({
@@ -19,7 +23,17 @@ export const MessagesByStudent = () => {
 
     })
 
-
+    const createMessageNotification = (notification) => {
+        return fetch(`http://localhost:8000/notifications?teacher=${teacherId}`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Token ${SMTokenObject.token}`,
+                'Accept': 'application/json',
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(notification)
+        })
+    }
     const changeMessageState = (domEvent) => {
         const newMessage = Object.assign({}, currentMessage)
         newMessage[domEvent.target.name] = domEvent.target.value
@@ -75,6 +89,7 @@ export const MessagesByStudent = () => {
                         }
 
                         createMessage(message)
+                            .then(() => createMessageNotification(notification))
                             .then(() => window.location.reload())
                     }}
                     className="btn btn-primary">Send</button>

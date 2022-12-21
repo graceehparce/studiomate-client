@@ -14,6 +14,7 @@ import { MessagesByTeacher } from "../teachers/Messages"
 import { ResourceList } from "../teachers/ResourceList"
 import { LessonsList } from "../teachers/LessonsList"
 import { StudentLessonList } from "../teachers/StudentLessonList"
+import { NotificationsList } from "../teachers/Notifications"
 
 export const TeacherViews = () => {
     return (
@@ -40,6 +41,8 @@ export const TeacherViews = () => {
                 <Route path="/resources/:teacherId" element={<ResourceList />} />
                 <Route path="/lessons" element={<LessonsList />} />
                 <Route path="/lessons/:studentId" element={<StudentLessonList />} />
+                <Route path="/notifications" element={<NotificationsList />} />
+
 
 
 

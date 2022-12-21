@@ -18,6 +18,9 @@ export const StudentLessonList = () => {
         time: "",
         date: ""
     })
+    const notification = {
+        notification_type: 4
+    }
 
     useEffect(() => {
         getStudentLessons(studentId).then(data => setLessons(data))
@@ -42,6 +45,29 @@ export const StudentLessonList = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(request)
+        })
+    }
+    const createRequestNotificationFromTeacher = (notification) => {
+        return fetch(`http://localhost:8000/notifications?student=${studentId}`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Token ${SMTokenObject.token}`,
+                'Accept': 'application/json',
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(notification)
+        })
+    }
+
+    const createRequestNotificationFromStudent = (notification) => {
+        return fetch(`http://localhost:8000/notifications?teacher=${student.teacher.id}`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Token ${SMTokenObject.token}`,
+                'Accept': 'application/json',
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(notification)
         })
     }
 
@@ -84,6 +110,7 @@ export const StudentLessonList = () => {
                                         }
 
                                         updateRequest(acceptedRequest)
+                                            .then(() => createRequestNotificationFromStudent(notification))
                                             .then(() => window.location.reload())
                                     }}
                                     className="btn btn-primary">Accept</button>
@@ -148,6 +175,7 @@ export const StudentLessonList = () => {
                                 }
 
                                 createRequest(request)
+                                    .then(() => createRequestNotificationFromTeacher(notification))
                                     .then(() => window.location.reload())
                             }}
                             className="btn btn-primary">Send</button>

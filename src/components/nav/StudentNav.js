@@ -26,6 +26,11 @@ export const StudentNav = () => {
                 </li>
             }
             {
+                <li className="navbar__item active">
+                    <Link className="navbar__link" to={`/notifications/${student.id}`}>Notifications</Link>
+                </li>
+            }
+            {
                 localStorage.getItem("sm_token")
                     ? <li className="navbar__item navbar__logout">
                         <Link className="navbar__link" to="" onClick={() => {

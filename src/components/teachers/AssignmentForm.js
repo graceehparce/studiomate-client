@@ -4,9 +4,13 @@ import { createAssignment } from "../managers/AssignmentManager"
 
 
 export const AssignmentForm = () => {
-
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
     const { studentId } = useParams()
     const navigate = useNavigate()
+    const notification = {
+        notification_type: 3
+    }
 
     const [currentAssignment, setCurrentAssignment] = useState({
         student: studentId,
@@ -21,6 +25,18 @@ export const AssignmentForm = () => {
         const newAssignment = Object.assign({}, currentAssignment)
         newAssignment[domEvent.target.name] = domEvent.target.value
         setCurrentAssignment(newAssignment)
+    }
+
+    const createAssignmentNotification = (notification) => {
+        return fetch(`http://localhost:8000/notifications?student=${studentId}`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Token ${SMTokenObject.token}`,
+                'Accept': 'application/json',
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(notification)
+        })
     }
 
     return (
@@ -75,6 +91,7 @@ export const AssignmentForm = () => {
                     }
 
                     createAssignment(assignment)
+                        .then(() => createAssignmentNotification(notification))
                         .then(() => navigate(`/assignments/${studentId}`))
                 }}
                 className="btn btn-primary">Create</button>

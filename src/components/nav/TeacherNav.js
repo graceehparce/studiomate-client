@@ -14,7 +14,12 @@ export const TeacherNav = () => {
             }
             {
                 <li className="navbar__item active">
-                    <Link className="navbar__link" to="/students">Home</Link>
+                    <Link className="navbar__link" to="/students">My Studio</Link>
+                </li>
+            }
+            {
+                <li className="navbar__item active">
+                    <Link className="navbar__link" to="/notifications">Notifications</Link>
                 </li>
             }
             {
