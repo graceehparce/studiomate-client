@@ -2,6 +2,8 @@ import React, { useEffect } from "react"
 import { getStudents } from "../managers/StudentManager"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { Card, Group, Text, Image, Title, Button } from "@mantine/core"
+import "./StudentList.css"
 
 export const StudentList = () => {
     const [students, setStudents] = useState([])
@@ -14,22 +16,27 @@ export const StudentList = () => {
 
 
     return (
-        <article>
-            <h1>These are your students:</h1>
+        <Group>
             {
                 students.map(student => {
-                    return <section key={`student--${student.id}`} className="student">
-                        <img className="student_img" src={student.img} alt=""></img>
-                        <div className="student_name">{student.full_name}</div>
-                        <div className="student_phone">Phone: {student.phone_number}</div>
-                        <div className="student_email">Email: {student.email}</div>
-                        <button className="edit__game"
-                            onClick={() => {
-                                navigate({ pathname: `/students/${student.id}` })
-                            }}>View Profile</button>
-                    </section>
+                    return <Card shadow="lg" px={50} p="lg" radius="lg" withBorder>
+                        <div className="borderBox">
+                            <Image radius={20} height={200} src={student.img} alt="StudentImg" />
+                        </div>
+                        <Title mt="md" color="dark" size="" weight={700}>{student.full_name}</Title>
+                        <Text>Phone: {student.phone_number}</Text>
+                        <Text>Email: {student.email}</Text>
+                        <div className="buttonContainer">
+                            <Button variant="light"
+                                color="orangy"
+                                radius={20}
+                                onClick={() => {
+                                    navigate({ pathname: `/students/${student.id}` })
+                                }}>View Profile</Button>
+                        </div>
+                    </Card>
                 })
             }
-        </article>
+        </Group >
     )
 }

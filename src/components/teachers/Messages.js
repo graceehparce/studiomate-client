@@ -1,11 +1,18 @@
 import React, { useEffect } from "react"
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { getMessages } from "../managers/MessageManager"
 import { getStudent } from "../managers/StudentManager"
 import { getTeacher } from "../managers/TeacherManager"
 import { createMessage } from "../managers/MessageManager"
+import { ScrollArea, Button, Stack, Group, TextInput, Card, Image, Badge } from '@mantine/core';
+import { IconSwitchHorizontal } from "@tabler/icons"
+import "./Messages.css"
+import { IconMessages } from "@tabler/icons"
+
+
+
 
 export const MessagesByTeacher = () => {
     const localSM = localStorage.getItem("sm_token")
@@ -55,45 +62,117 @@ export const MessagesByTeacher = () => {
     }
 
 
-    return (
-        <article>
-            <h1>Messages</h1>
-            <img className="student_img" src={student.img} alt=""></img>and
-            <img className="teacher_img" src={teacher.img} alt=""></img>
 
-            {
-                messages.map(message => {
-                    return <section key={`message--${message.id}`} className="message">
-                        <div>{message.sender.first_name}{message.date_time}</div>
-                        <div>{message.content}</div>
-                    </section>
-                })
-            }
-            <form className="messageForm">
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="message">Message: </label>
-                        <input type="text" name="content" required autoFocus className="form-control"
+
+    return (
+        <div style={{
+            width: 600, marginLeft: 'auto', marginRight: 'auto'
+        }}>
+            <Card shadow="sm" px={30} p="md" radius="lg" withBorder>
+                <Card.Section shadow="sm" px={30} p="md" radius="lg" withBorder>
+
+                    <div className="duoPicBox">
+                        <Link to={`/students/${student.id}`}>
+                            <Image
+                                radius={100}
+                                height={100}
+                                width="auto"
+                                src={student.img}
+                                alt="Student"
+                                fit="contain"
+                            />
+                        </Link>
+                        <IconSwitchHorizontal />
+                        <Image
+                            radius={100}
+                            height={100}
+                            width="auto"
+                            src={teacher.img}
+                            alt="Student"
+                            fit="contain"
+                        />
+                    </div>
+                    <div className="labelBox">
+                        <Badge
+                            className="nameBadge"
+                            size="xl"
+                            color="browny"
+                            variant="light"
+                            radius={30} >
+                            <IconMessages />
+                            {teacher.full_name} & {student.full_name}
+                        </Badge>
+                    </div>
+                </Card.Section>
+                <Stack align="center">
+                    <ScrollArea className="scrollArea" style={{ width: 400, height: 300 }} >
+                        {
+                            messages.map(message => {
+                                if (message.sender.id === student.user.id) {
+                                    return <section className="messageBubble" key={`message--${message.id}`} >
+                                        <div className="idMessage">
+                                            <Image
+                                                radius={100}
+                                                height={50}
+                                                width="auto"
+                                                src={student.img}
+                                                alt="Student"
+                                                fit="contain"
+                                            />
+                                            <div >{message.date_time}</div>
+                                        </div>
+                                        <div>{message.content}</div>
+                                    </section>
+                                }
+                                else {
+                                    return <section className="messageBubble" key={`message--${message.id}`} >
+                                        <div className="messageId2">
+                                            <div>{message.date_time}</div>
+                                            <Image
+                                                radius={100}
+                                                height={50}
+                                                width="auto"
+                                                src={teacher.img}
+                                                alt="Student"
+                                                fit="contain"
+                                            />
+                                        </div>
+                                        <div>{message.content}</div>
+                                    </section>
+                                }
+                            })
+                        }
+                    </ScrollArea>
+                </Stack>
+                <div className="messageBox">
+                    <Group className="messageArea" position="center" grow>
+                        <TextInput size="md" placeholder="" label="New Message:" type="text" name="content" required autoFocus className="messageInput"
                             value={currentMessage.content}
                             onChange={changeMessageState}
                         />
-                    </div>
-                </fieldset>
-                <button type="submit"
-                    onClick={evt => {
-                        evt.preventDefault()
+                        <Button
+                            variant="light"
+                            color="orangy"
+                            radius={20}
+                            type="submit"
+                            className="sendButton"
+                            onClick={evt => {
+                                evt.preventDefault()
 
-                        const message = {
-                            content: currentMessage.content,
-                            recipient: student.user.id
-                        }
+                                const message = {
+                                    content: currentMessage.content,
+                                    recipient: student.user.id
+                                }
 
-                        createMessage(message)
-                            .then(() => createMessageNotification(notification))
-                            .then(() => window.location.reload())
-                    }}
-                    className="btn btn-primary">Send</button>
-            </form >
-        </article>
+                                createMessage(message)
+                                    .then(() => createMessageNotification(notification))
+                                    .then(() => window.location.reload())
+                            }}
+                        >Send</Button>
+                    </Group>
+                </div>
+            </Card>
+        </div>
     )
 }
+

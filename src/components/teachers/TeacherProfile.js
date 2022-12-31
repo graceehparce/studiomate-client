@@ -2,7 +2,9 @@ import React, { useEffect } from "react"
 import { useState } from "react"
 import { getTeacher } from "../managers/TeacherManager"
 import { useNavigate } from "react-router-dom"
-import { Link } from "react-router-dom"
+import { Button, Card, Group, Title, Image, Text } from "@mantine/core"
+import "./TeacherProfile.css"
+
 
 export const TeacherProfile = () => {
     const [teacher, setTeacher] = useState({})
@@ -15,28 +17,58 @@ export const TeacherProfile = () => {
 
 
     return (
-        <article className="teacherProfile">
-            <section key={`teacher--${teacher.id}`} className="teacher">
-                <img className="teacher_img" src={teacher.img} alt=""></img>
-                <div className="teacher_name">{teacher.full_name}</div>
-                <div className="teacher_phone">Phone: {teacher.phone_number}</div>
-                <div className="teacher_email">Email: {teacher.email}</div>
-                <ul>
-                    <li className="navbar__item active">
-                        <Link className="navbar__link" to={`/resources/${teacher.id}`}>Resources</Link>
-                    </li>
-                    <li>
-                        <Link className="navbar__link" to={`/students`}>Studio</Link>
-                    </li>
-                    <li>
-                        <Link className="navbar__link" to={`/lessons`}>Upcoming Lessons</Link>
-                    </li>
-                </ul>
-                <button className="edit__game"
-                    onClick={() => {
-                        navigate({ pathname: `/editProfileForm/${teacher.id}` })
-                    }}>Edit Profile</button>
-            </section>
-        </article>
-    )
+        <div style={{ width: 500, marginLeft: 'auto', marginRight: 'auto' }}>
+            <Card shadow="sm" px={30} p="md" radius="lg" withBorder>
+                <Card.Section shadow="sm" px={30} p="md" radius="lg" withBorder>
+                    <div style={{ width: 240, marginLeft: 'auto', marginRight: 'auto' }}>
+                        <Image
+                            radius={30}
+                            height={230}
+                            width={230}
+                            src={teacher.img}
+                            alt="Teacher"
+                            fit="contain"
+                        />
+                    </div>
+                    <Title mt="md" color="dark" size="" weight={700}>{teacher.full_name}</Title>
+                    <Text>Phone: {teacher.phone_number}</Text>
+                    <Text>Email: {teacher.email}</Text>
+                </Card.Section>
+                <div className="editSection">
+                    <Group position="center" spacing='sm' grow>
+                        <Button variant="light"
+                            color="orangy"
+                            radius={20} onClick={() => {
+                                navigate({ pathname: `/resources/${teacher.id}` })
+                            }}>
+                            Resources
+                        </Button>
+                        <Button variant="light"
+                            color="orangy"
+                            radius={20} onClick={() => {
+                                navigate({ pathname: `/students` })
+                            }}>
+                            Studio
+                        </Button>
+                        <Button variant="light"
+                            color="orangy"
+                            radius={20} onClick={() => {
+                                navigate({ pathname: `/lessons` })
+                            }}>
+                            Lessons
+                        </Button>
+                    </Group>
+                </div>
+                <div className="editSection">
+                    <Group position="center" spacing='sm' grow>
+                        <Button variant="dark"
+                            color="orangy"
+                            radius={20}
+                            onClick={() => {
+                                navigate({ pathname: `/editProfileForm/${teacher.id}` })
+                            }}>Edit Profile</Button>
+                    </Group>
+                </div>
+            </Card >
+        </div >)
 }

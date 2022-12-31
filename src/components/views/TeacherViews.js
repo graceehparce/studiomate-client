@@ -21,8 +21,6 @@ export const TeacherViews = () => {
         <Routes>
             <Route path="/" element={
                 <>
-                    <h1>StudioMate</h1>
-                    <div>The one stop shop for you and your studiomates!</div>
 
                     <Outlet />
                 </>

@@ -1,0 +1,25 @@
+.inputBox {
+    border-radius: 20px;
+    border: 2px solid #816156;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.assignmentForm_title {
+    font-family: 'Raleway';
+    font-weight: 900;
+    margin-top: 10px;
+}
+
+.picBorder {
+    border-radius: 5px solid #816156;
+}
+
+.badge {
+    margin-bottom: 20px;
+}
+
+.buttonCreate {
+    margin-left: 50px;
+    margin-right: 50px;
+}

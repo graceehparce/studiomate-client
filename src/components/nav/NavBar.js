@@ -2,6 +2,7 @@ import { TeacherNav } from "./TeacherNav"
 import "./NavBar.css"
 import { StudentNav } from "./StudentNav"
 
+
 export const NavBar = () => {
 
     const localSM = localStorage.getItem("sm_token")

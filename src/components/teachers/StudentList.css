@@ -1,0 +1,13 @@
+.borderBox {
+    background-color: #d69c86;
+    padding: 4px;
+    border-radius: 20px;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
