@@ -3,6 +3,10 @@ import { useState } from "react"
 import { createResource, deleteResource, getResources } from "../managers/ResourceManager"
 import { useParams } from "react-router-dom"
 import { getSingleTeacher } from "../managers/TeacherManager"
+import { Card, Image, Button, Group, TextInput } from "@mantine/core"
+import { Link } from "react-router-dom"
+import "./ResourceList.css"
+
 
 export const ResourceList = () => {
     const [resources, setResources] = useState([])
@@ -41,30 +45,49 @@ export const ResourceList = () => {
 
 
     return (
-        <article>
+        <article className="resourceBody">
+            <Link to={`/teacher`}>
+                <Image
+                    radius={100}
+                    height={100}
+                    width="auto"
+                    src={teacher.img}
+                    alt="Student"
+                    fit="contain"
+                />
+            </Link>
             <h1>{teacher.full_name}'s Resources:</h1>
-            {
-                resources.map(resource => {
-                    return <section key={`resource--${resource.id}`} className="resource">
-                        <div className="resource">
-                            <img src={resource.img} alt="" className="resource_img" style={{ width: '200px', height: '300px' }} />
-                            <a className="text" target="_blank" href={resource.resource}>{resource.name}</a>
-                            <button onClick={
-                                () => {
-                                    deleteResource(resource.id).then(() => window.location.reload())
-                                }
-                            }>Delete</button>
-                        </div>
-
-
-                    </section>
-                })
-            }
+            <Group>
+                {
+                    resources.map(resource => {
+                        return <Card shadow="lg" px={50} p="lg" radius="lg" withBorder>
+                            <div className="resourceLabel">
+                                <Image src={resource.img} className="resource_img" style={{ width: '100px', height: '150px' }} />
+                                <a className="text" target="_blank" href={resource.resource}>{resource.name}</a>
+                                <Button
+                                    className="resourceButton"
+                                    variant="filled"
+                                    color="orangy"
+                                    radius={20} onClick={
+                                        () => {
+                                            deleteResource(resource.id).then(() => window.location.reload())
+                                        }
+                                    }>Delete</Button>
+                            </div>
+                        </Card>
+                    })
+                }
+            </Group>
             {
                 SMTokenObject.is_staff === true
                     ?
 
-                    <button onClick={() => setShowForm(!showForm)}>Add New Resource</button>
+                    <Button
+                        className="expandButton"
+                        variant="light"
+                        color="orangy"
+                        radius={20}
+                        onClick={() => setShowForm(!showForm)}>Add New Resource</Button>
 
                     :
                     ""
@@ -72,54 +95,48 @@ export const ResourceList = () => {
             {
                 showForm
                     ?
-                    <form>
-                        <h2>New Resource</h2>
-                        <fieldset>
-                            <div className="form-group">
-                                <label htmlFor="name">Resource Name: </label>
-                                <input type="text" name="name" required autoFocus className="form-control"
-                                    value={newResource.name}
-                                    onChange={changeResourceState}
-                                />
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <div className="form-group">
-                                <label htmlFor="resource">Resource URL: </label>
-                                <input type="resource" name="resource" required autoFocus className="form-control"
-                                    value={newResource.resource}
-                                    onChange={changeResourceState}
-                                />
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <div className="form-group">
-                                <label htmlFor="img">Image: </label>
-                                <input type="text" name="img" required autoFocus className="form-control"
-                                    value={newResource.img}
-                                    onChange={changeResourceState}
-                                />
-                            </div>
-                        </fieldset>
-                        <button type="submit"
-                            onClick={evt => {
-                                evt.preventDefault()
+                    <div style={{
+                        width: 600, marginLeft: 'auto', marginRight: 'auto'
+                    }}>
+                        <Card shadow="sm" px={30} p="md" radius="lg" withBorder>
+                            <h2>New Resource</h2>
+                            <TextInput label="Resource Name:" type="text" name="name" required autoFocus className="form-control"
+                                value={newResource.name}
+                                onChange={changeResourceState}
+                            />
+                            <TextInput label="Resource URL:" type="resource" name="resource" required autoFocus className="form-control"
+                                value={newResource.resource}
+                                onChange={changeResourceState}
+                            />
+                            <TextInput label="Image:" type="text" name="img" required autoFocus className="form-control"
+                                value={newResource.img}
+                                onChange={changeResourceState}
+                            />
+                            <div className="buttonSection">
+                                <Button
+                                    variant="light"
+                                    color="orangy"
+                                    radius={20} type="submit"
+                                    onClick={evt => {
+                                        evt.preventDefault()
 
-                                const resource = {
-                                    resource: newResource.resource,
-                                    img: newResource.img,
-                                    name: newResource.name,
-                                    teacher: parseInt(teacherId)
-                                }
+                                        const resource = {
+                                            resource: newResource.resource,
+                                            img: newResource.img,
+                                            name: newResource.name,
+                                            teacher: parseInt(teacherId)
+                                        }
 
-                                createResource(resource)
-                                    .then(() => window.location.reload())
-                            }}
-                            className="btn btn-primary">Create</button>
-                    </form >
+                                        createResource(resource)
+                                            .then(() => window.location.reload())
+                                    }}
+                                    className="createButton">Create</Button>
+                            </div>
+                        </Card >
+                    </div >
                     :
                     ""
             }
-        </article>
+        </article >
     )
 }

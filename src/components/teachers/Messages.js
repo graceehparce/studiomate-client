@@ -61,6 +61,19 @@ export const MessagesByTeacher = () => {
         })
     }
 
+    const formatDate = (project) => {
+        let initialSplit = project.split("T")
+        let formattedDate = initialSplit[0]
+        formattedDate = formattedDate.split("-")
+        formattedDate = [formattedDate[1], formattedDate[2], formattedDate[0]]
+        let finishedDate = formattedDate.join("/")
+        let formattedTime = initialSplit[1]
+        formattedTime = formattedTime.split(':')
+        formattedTime = [formattedTime[0], formattedTime[1]]
+        let finishedTime = formattedTime.join(":")
+        return `${finishedDate}, ${finishedTime}`
+    }
+
 
 
 
@@ -109,35 +122,39 @@ export const MessagesByTeacher = () => {
                         {
                             messages.map(message => {
                                 if (message.sender.id === student.user.id) {
+                                    const dateTime = formatDate(message.date_time)
                                     return <section className="messageBubble" key={`message--${message.id}`} >
                                         <div className="idMessage">
                                             <Image
+                                                className="messageImg"
                                                 radius={100}
-                                                height={50}
+                                                height={40}
                                                 width="auto"
                                                 src={student.img}
                                                 alt="Student"
                                                 fit="contain"
                                             />
-                                            <div >{message.date_time}</div>
+                                            <div >{dateTime}</div>
                                         </div>
-                                        <div>{message.content}</div>
+                                        <div className="messageContent">{message.content}</div>
                                     </section>
                                 }
                                 else {
-                                    return <section className="messageBubble" key={`message--${message.id}`} >
+                                    const dateTime = formatDate(message.date_time)
+                                    return <section className="messageBubble2" key={`message--${message.id}`} >
                                         <div className="messageId2">
-                                            <div>{message.date_time}</div>
+                                            <div>{dateTime}</div>
                                             <Image
+                                                className="messageImg"
                                                 radius={100}
-                                                height={50}
+                                                height={40}
                                                 width="auto"
                                                 src={teacher.img}
                                                 alt="Student"
                                                 fit="contain"
                                             />
                                         </div>
-                                        <div>{message.content}</div>
+                                        <div className="messageContent2">{message.content}</div>
                                     </section>
                                 }
                             })

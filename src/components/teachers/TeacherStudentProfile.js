@@ -38,7 +38,7 @@ export const TeacherStudentProfile = () => {
                     <Text>Phone: {student.phone_number}</Text>
                     <Text>Email: {student.email}</Text>
                 </Card.Section>
-                <div className="buttonSection">
+                <div className="buttonListSection">
                     <Button
                         className="buttonListProfile"
                         variant="light"

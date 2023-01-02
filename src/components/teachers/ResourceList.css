@@ -1,0 +1,36 @@
+.resourceBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.text {
+    color: black;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: larger;
+}
+
+.resourceLabel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.expandButton {
+    margin: 20px;
+}
+
+.resourceButton {
+    margin-top: 10px;
+}
+
+.buttonSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}

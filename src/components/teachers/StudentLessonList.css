@@ -1,0 +1,45 @@
+.headBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.bodySection {
+    padding: 10px;
+}
+
+.formButton {
+    margin-top: 20px;
+}
+
+.buttonBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.formSection {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    border: 5px solid #623A2C;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.centerForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.lessonSubmit {
+    margin-top: 10px;
+}

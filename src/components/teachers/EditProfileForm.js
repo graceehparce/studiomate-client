@@ -3,6 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { updateTeacher } from "../managers/TeacherManager"
 import { useEffect } from "react"
 import { getTeacher } from "../managers/TeacherManager"
+import { Button, TextInput, Card } from "@mantine/core"
+import "./EditProfile.css"
+
 
 export const EditProfileForm = () => {
 
@@ -37,71 +40,58 @@ export const EditProfileForm = () => {
     }
 
     return (
-        <form className="assignmentForm">
-            <h2 className="assignmentForm_title">Edit Profile Here</h2>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="phone_number">Phone Number: </label>
-                    <input placeholder={currentTeacher.phone_number} type="text" name="phone_number" required autoFocus className="form-control"
-                        value={currentTeacher.phone_number}
-                        onChange={changeTeacherState}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="first_name">First Name: </label>
-                    <input placeholder={currentTeacher.firstName} type="text" name="first_name" required autoFocus className="form-control"
-                        value={currentTeacher.first_name}
-                        onChange={changeTeacherState}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="last_name">Last Name: </label>
-                    <input placeholder={currentTeacher.last_name} type="text" name="last_name" required autoFocus className="form-control"
-                        value={currentTeacher.last_name}
-                        onChange={changeTeacherState}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="img">Profile Image: </label>
-                    <input placeholder={currentTeacher.img} type="text" name="img" required autoFocus className="form-control"
-                        value={currentTeacher.img}
-                        onChange={changeTeacherState}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="email">Email: </label>
-                    <input placeholder={currentTeacher.email} type="text" name="email" required autoFocus className="form-control"
-                        value={currentTeacher.email}
-                        onChange={changeTeacherState}
-                    />
-                </div>
-            </fieldset>
-            <button type="submit"
-                onClick={evt => {
-                    evt.preventDefault()
+        <div style={{
+            width: 700, marginLeft: 'auto', marginRight: 'auto'
+        }}>
+            <Card shadow="lg" px={30} p="md" radius="lg" withBorder>
+                <h2 className="assignmentForm_title">Edit Profile Here</h2>
+                <TextInput label="Phone Number:" placeholder={currentTeacher.phone_number} type="text" name="phone_number" required autoFocus className="form-control"
+                    value={currentTeacher.phone_number}
+                    onChange={changeTeacherState}
+                />
 
-                    const teacher = {
-                        phone_number: currentTeacher.phone_number,
-                        img: currentTeacher.img,
-                        first_name: currentTeacher.first_name,
-                        last_name: currentTeacher.last_name,
-                        email: currentTeacher.email,
-                        id: parseInt(teacherId)
-                    }
+                <TextInput label="First Name:" placeholder={currentTeacher.firstName} type="text" name="first_name" required autoFocus className="form-control"
+                    value={currentTeacher.first_name}
+                    onChange={changeTeacherState}
+                />
+                <TextInput label="Last Name:" placeholder={currentTeacher.last_name} type="text" name="last_name" required autoFocus className="form-control"
+                    value={currentTeacher.last_name}
+                    onChange={changeTeacherState}
+                />
+
+                <TextInput label="Profile Image:" placeholder={currentTeacher.img} type="text" name="img" required autoFocus className="form-control"
+                    value={currentTeacher.img}
+                    onChange={changeTeacherState}
+                />
+                <TextInput label="Email:" placeholder={currentTeacher.email} type="text" name="email" required autoFocus className="form-control"
+                    value={currentTeacher.email}
+                    onChange={changeTeacherState}
+                />
+                <div className="profileEditButton">
+                    <Button
+                        variant="light"
+                        color="orangy"
+                        radius={20}
+                        type="submit"
+                        onClick={evt => {
+                            evt.preventDefault()
+
+                            const teacher = {
+                                phone_number: currentTeacher.phone_number,
+                                img: currentTeacher.img,
+                                first_name: currentTeacher.first_name,
+                                last_name: currentTeacher.last_name,
+                                email: currentTeacher.email,
+                                id: parseInt(teacherId)
+                            }
 
 
-                    updateTeacher(teacher)
-                        .then(() => navigate(`/teacher`))
-                }}
-                className="btn btn-primary">Update</button>
-        </form >
+                            updateTeacher(teacher)
+                                .then(() => navigate(`/teacher`))
+                        }}
+                        className="btn btn-primary">Update</Button>
+                </div>
+            </Card>
+        </div>
     )
 }
