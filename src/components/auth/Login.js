@@ -22,7 +22,7 @@ export const Login = () => {
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res && "is_staff" in res) {
                     localStorage.setItem("sm_token", JSON.stringify(res))
-                    navigate("/")
+                    navigate("/home")
                 }
                 else {
                     invalidDialog.current.showModal()
@@ -43,8 +43,8 @@ export const Login = () => {
                     </dialog>
                     <section className="mainSection">
                         <form onSubmit={handleLogin}>
-                            <Image className="logoPicLogin" height={150} fit="contain" src={logo} alt="StudentImg" />
-                            <h2>Please sign in:</h2>
+                            <Image className="logoPicLogin" height={120} fit="contain" src={logo} alt="StudentImg" />
+                            <div className="loginHeader">Please sign in:</div>
                             <TextInput label="Username:" ref={username} type="username" id="username" className="form-control" placeholder="Username address" required autoFocus />
                             <TextInput label="Password:" ref={password} type="password" id="password" className="form-control" placeholder="Password" required />
                             <Group position="center" spacing='sm' grow>

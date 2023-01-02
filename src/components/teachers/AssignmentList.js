@@ -37,16 +37,31 @@ export const AssignmentList = () => {
             <Card shadow="lg" px={30} p="md" radius="lg" withBorder>
                 <Card.Section shadow="sm" px={30} p="md" radius="lg" withBorder>
                     <div className="assignmentPicBox" style={{ width: 'auto', marginLeft: 'auto', marginRight: 'auto' }}>
-                        <Link to={`/students/${student.id}`}>
-                            <Image
-                                radius={100}
-                                height={100}
-                                width="auto"
-                                src={student.img}
-                                alt="Student"
-                                fit="contain"
-                            />
-                        </Link>
+                        {
+                            SMTokenObject.is_staff === true
+                                ?
+                                <Link to={`/students/${student.id}`}>
+                                    <Image
+                                        radius={100}
+                                        height={100}
+                                        width="auto"
+                                        src={student.img}
+                                        alt="Student"
+                                        fit="contain"
+                                    />
+                                </Link>
+                                :
+                                <Link to={`/myStudentProfile`}>
+                                    <Image
+                                        radius={100}
+                                        height={100}
+                                        width="auto"
+                                        src={student.img}
+                                        alt="Student"
+                                        fit="contain"
+                                    />
+                                </Link>
+                        }
                         <h2 className="assignmentListHeading">{student.full_name}'s Assignments</h2>
 
                     </div>

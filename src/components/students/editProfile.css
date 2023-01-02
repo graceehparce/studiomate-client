@@ -1,0 +1,17 @@
+.teacherPicker {
+    font-size: small;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.teacherLabel {
+    margin-right: 20px;
+}
+
+.profileUpdateButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}

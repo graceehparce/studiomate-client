@@ -46,18 +46,8 @@ export const ResourceList = () => {
 
     return (
         <article className="resourceBody">
-            <Link to={`/teacher`}>
-                <Image
-                    radius={100}
-                    height={100}
-                    width="auto"
-                    src={teacher.img}
-                    alt="Student"
-                    fit="contain"
-                />
-            </Link>
             <h1>{teacher.full_name}'s Resources:</h1>
-            <Group>
+            <Group className="resourceBoxes">
                 {
                     resources.map(resource => {
                         return <Card shadow="lg" px={50} p="lg" radius="lg" withBorder>

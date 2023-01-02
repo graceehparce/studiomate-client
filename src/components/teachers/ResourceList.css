@@ -34,3 +34,10 @@
     align-items: center;
     margin-top: 10px;
 }
+
+.resourceBoxes {
+    margin-left: 25px;
+    margin-right: 25px;
+    text-align: center;
+
+}

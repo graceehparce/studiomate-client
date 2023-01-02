@@ -1,6 +1,11 @@
 import React, { useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { registerUser } from "../managers/AuthManager"
+import { TextInput, Card, Image, Button, BackgroundImage } from "@mantine/core"
+import piano from "../images/bigPiano.jpg"
+import logo from "../images/Mate.png"
+import "./Login.css"
+
 
 export const RegisterTeacher = () => {
     const first_name = useRef()
@@ -41,56 +46,42 @@ export const RegisterTeacher = () => {
     }
 
     return (
-        <main style={{ textAlign: "center" }}>
+        <BackgroundImage src={piano} fit="contain">
+            <div className="registerBox" style={{
+                width: 700, marginLeft: 'auto', marginRight: 'auto'
+            }}>
+                <Card shadow="lg" px={30} radius="lg" withBorder>
+                    <dialog className="dialog dialog--password" ref={passwordDialog}>
+                        <div>Passwords do not match</div>
+                        <button className="button--close" onClick={e => passwordDialog.current.close()}>Close</button>
+                    </dialog>
 
-            <dialog className="dialog dialog--password" ref={passwordDialog}>
-                <div>Passwords do not match</div>
-                <button className="button--close" onClick={e => passwordDialog.current.close()}>Close</button>
-            </dialog>
+                    <form className="form--login" onSubmit={handleRegister}>
+                        <Image className="logoPicLogin" height={100} fit="contain" src={logo} alt="StudentImg" />
+                        <div className="registerHeading">Register an account:</div>
+                        <TextInput size="xs" label="First Name:" ref={first_name} type="text" name="first_name" className="form-control" placeholder="First name" required autoFocus />
+                        <TextInput size="xs" label="Last Name:" ref={last_name} type="text" name="last_name" className="form-control" placeholder="Last name" required />
+                        <TextInput size="xs" label="Email:" ref={email} type="text" name="email" className="form-control" placeholder="Email" required />
+                        <TextInput size="xs" label="Username:" ref={username} type="text" name="username" className="form-control" placeholder="Username" required />
+                        <TextInput size="xs" label="Phone Number:" ref={phone_number} type="text" name="phone_number" className="form-control" placeholder="Phone number" required />
+                        <TextInput size="xs" label="Profile Image:" ref={img} type="text" name="img" className="form-control" placeholder="Img" required />
+                        <TextInput size="xs" label="Password:" ref={password} type="password" name="password" className="form-control" placeholder="Password" required />
+                        <TextInput size="xs" label="Verify Password:" ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
+                        <div className="buttonArea">
+                            <Button
+                                variant="light"
+                                color="orangy"
+                                radius={20}
+                                className="registerButton"
+                                type="submit">Register</Button>
+                            <section className="link--register">
+                                Already registered? <Link to="/">Login</Link>
+                            </section>
+                        </div>
+                    </form>
+                </Card>
+            </div>
+        </BackgroundImage >
 
-            <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Register an account</h1>
-                <fieldset>
-                    <label htmlFor="first_name"> First Name </label>
-                    <input ref={first_name} type="text" name="first_name" className="form-control" placeholder="First name" required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="last_name"> Last Name </label>
-                    <input ref={last_name} type="text" name="last_name" className="form-control" placeholder="Last name" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputUsername">Username</label>
-                    <input ref={username} type="text" name="username" className="form-control" placeholder="Username" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputEmail">Email</label>
-                    <input ref={email} type="text" name="email" className="form-control" placeholder="Email" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputImg">Profile Image</label>
-                    <input ref={img} type="text" name="img" className="form-control" placeholder="Img" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputPhoneNumber">Phone Number</label>
-                    <input ref={phone_number} type="text" name="phone_number" className="form-control" placeholder="Phone number" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputPassword"> Password </label>
-                    <input ref={password} type="password" name="password" className="form-control" placeholder="Password" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
-                    <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
-                </fieldset>
-                <fieldset style={{
-                    textAlign: "center"
-                }}>
-                    <button className="btn btn-1 btn-sep icon-send" type="submit">Register</button>
-                </fieldset>
-            </form>
-            <section className="link--register">
-                Already registered? <Link to="/">Login</Link>
-            </section>
-        </main>
     )
 }

@@ -43,3 +43,21 @@
 .lessonSubmit {
     margin-top: 10px;
 }
+
+.decideBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d69c86;
+    border-radius: 30px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.listLessons {
+    margin: 10px;
+    background-color: #e4bdaf;
+    border-radius: 30px;
+    padding: 10px;
+}

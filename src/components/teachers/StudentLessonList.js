@@ -8,9 +8,9 @@ import { deleteRequest } from "../managers/RequestManager"
 import { Button, Card, Image, Badge } from "@mantine/core"
 import { IconCalendar } from "@tabler/icons"
 import { Link } from "react-router-dom"
-import { getTeacher } from "../managers/TeacherManager"
+import { getSingleTeacher, getTeacher } from "../managers/TeacherManager"
 import "./StudentLessonList.css"
-import { DatePicker, TimeInput } from "@mantine/dates"
+import { DatePicker, DateRangePicker, TimeInput } from "@mantine/dates"
 
 
 export const StudentLessonList = () => {
@@ -31,15 +31,15 @@ export const StudentLessonList = () => {
     }
 
     useEffect(() => {
-        getTeacher().then(data => setTeacher(data[0]))
-    }, [])
-
-    useEffect(() => {
         getStudentLessons(studentId).then(data => setLessons(data))
     }, [])
 
     useEffect(() => {
-        getStudent(studentId).then(data => setStudent(data))
+        getStudent(studentId)
+            .then(data => setStudent(data))
+            .then(getSingleTeacher(student?.teacher?.id)
+                .then(data => setTeacher(data))
+            )
     }, [])
 
     const changeRequestState = (domEvent) => {
@@ -104,16 +104,31 @@ export const StudentLessonList = () => {
             <Card shadow="sm" px={30} p="md" radius="lg" withBorder>
                 <Card.Section shadow="sm" px={30} p="md" radius="lg" withBorder>
                     <div className="headBox">
-                        <Link to={`/students/${student.id}`}>
-                            <Image
-                                radius={100}
-                                height={100}
-                                width="auto"
-                                src={student.img}
-                                alt="Student"
-                                fit="contain"
-                            />
-                        </Link>
+                        {
+                            SMTokenObject.is_staff === true
+                                ?
+                                <Link to={`/students/${student.id}`}>
+                                    <Image
+                                        radius={100}
+                                        height={100}
+                                        width="auto"
+                                        src={student.img}
+                                        alt="Student"
+                                        fit="contain"
+                                    />
+                                </Link>
+                                :
+                                <Link to={`/myStudentProfile`}>
+                                    <Image
+                                        radius={100}
+                                        height={100}
+                                        width="auto"
+                                        src={student.img}
+                                        alt="Student"
+                                        fit="contain"
+                                    />
+                                </Link>
+                        }
                         <h1>{student.full_name}'s Upcoming Lessons:</h1>
                         <Badge
                             className="nameBadge"
@@ -133,7 +148,7 @@ export const StudentLessonList = () => {
                             if (lesson.accepted === true) {
                                 const date = formatDate(lesson.date)
                                 const time = formatTime(lesson.time)
-                                return <div>Lesson on {date} at {time}</div>
+                                return <div className="listLessons">Lesson on {date} at {time}</div>
                             }
                             else {
                                 return ""
@@ -149,43 +164,45 @@ export const StudentLessonList = () => {
                                 if (SMTokenObject.is_staff === true) {
                                     const date = formatDate(lesson.date)
                                     const time = formatTime(lesson.time)
-                                    return <div>Lesson on {date} at {time}</div>
+                                    return <div className="listLessons">Lesson on {date} at {time}</div>
                                 }
                                 else {
                                     const date = formatDate(lesson.date)
                                     const time = formatTime(lesson.time)
-                                    return <div>
+                                    return <div className="decideBox">
                                         <div>Lesson on {date} at {time}</div>
-                                        <Button className="formButton"
-                                            variant="light"
-                                            color="orangy"
-                                            radius={20}
-                                            type="submit"
-                                            onClick={evt => {
-                                                evt.preventDefault()
+                                        <div className="twoButtons">
+                                            <Button className="decideButton"
+                                                variant="light"
+                                                color="orangy"
+                                                radius={20}
+                                                type="submit"
+                                                onClick={evt => {
+                                                    evt.preventDefault()
 
-                                                const acceptedRequest = {
-                                                    id: lesson.id,
-                                                    accepted: true
-                                                }
+                                                    const acceptedRequest = {
+                                                        id: lesson.id,
+                                                        accepted: true
+                                                    }
 
-                                                updateRequest(acceptedRequest)
-                                                    .then(() => createRequestNotificationFromStudent(notification))
-                                                    .then(() => window.location.reload())
-                                            }}
-                                        >Accept</Button>
-                                        <Button
-                                            className="formButton"
-                                            variant="dark"
-                                            color="orangy"
-                                            radius={20} type="submit"
-                                            onClick={evt => {
-                                                evt.preventDefault()
+                                                    updateRequest(acceptedRequest)
+                                                        .then(() => createRequestNotificationFromStudent(notification))
+                                                        .then(() => window.location.reload())
+                                                }}
+                                            >Accept</Button>
+                                            <Button
+                                                className="decideButton"
+                                                variant="dark"
+                                                color="orangy"
+                                                radius={20} type="submit"
+                                                onClick={evt => {
+                                                    evt.preventDefault()
 
-                                                deleteRequest(lesson.id)
-                                                    .then(() => window.location.reload())
-                                            }}
-                                        >Decline</Button>
+                                                    deleteRequest(lesson.id)
+                                                        .then(() => window.location.reload())
+                                                }}
+                                            >Decline</Button>
+                                        </div>
                                     </div>
                                 }
                             }

@@ -33,8 +33,9 @@
 }
 
 .signInButton {
-    margin: 10px;
+    margin-top: 20px;
     padding: 10px;
+    margin-bottom: 45px;
 }
 
 .registerSection {
@@ -49,9 +50,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 90px;
-    padding-bottom: 150px;
+    padding-top: 50px;
+    padding-bottom: 220px;
 }
+
+.registerBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 180px;
+}
+
 
 .mainSection {
     display: flex;
@@ -62,6 +73,36 @@
     margin: none;
 }
 
-.logoPicLogin {
-    text-align: center;
+.registerButton {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.buttonArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectSection {
+    font-size: smaller;
+    margin-top: 10px;
+}
+
+.selectHeading {
+    margin-right: 10px;
+}
+
+.registerHeading {
+    font-weight: 900;
+    font-size: large;
+    margin-bottom: 10px;
+}
+
+.loginHeader {
+    font-weight: 900;
+    font-size: large;
+    margin-bottom: 10px;
+    margin-top: 20px;
 }

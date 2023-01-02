@@ -10,6 +10,8 @@ import "./AssignmentProfile.css"
 export const AssignmentProfile = () => {
     const [assignment, setAssignment] = useState([])
     const { assignmentId } = useParams()
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
 
     useEffect(() => {
         getAssignment(assignmentId).then(data => setAssignment(data))
@@ -23,16 +25,31 @@ export const AssignmentProfile = () => {
         }}>
             <Card shadow="sm" px={30} p="md" radius="lg" withBorder>
                 <Card.Section shadow="sm" px={30} p="md" radius="lg" withBorder>
-                    <Link to={`/students/${assignment?.student?.id}`}>
-                        <Image
-                            radius={100}
-                            height={100}
-                            width="auto"
-                            src={assignment?.student?.img}
-                            alt="Student"
-                            fit="contain"
-                        />
-                    </Link>
+                    {
+                        SMTokenObject.is_staff === true
+                            ?
+                            <Link to={`/students/${assignment?.student?.id}`}>
+                                <Image
+                                    radius={100}
+                                    height={100}
+                                    width="auto"
+                                    src={assignment?.student?.img}
+                                    alt="Student"
+                                    fit="contain"
+                                />
+                            </Link>
+                            :
+                            <Link to={`/myStudentProfile`}>
+                                <Image
+                                    radius={100}
+                                    height={100}
+                                    width="auto"
+                                    src={assignment?.student?.img}
+                                    alt="Student"
+                                    fit="contain"
+                                />
+                            </Link>
+                    }
                     <div style={{ width: 'auto', marginLeft: 'auto', marginRight: 'auto' }}>
                         <h1 className="assignmentTitle" mt="lg" color="dark" size="" weight={700}>{assignment?.student?.full_name}'s assignment</h1>
                         <Badge

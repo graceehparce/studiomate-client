@@ -15,6 +15,7 @@ import { ResourceList } from "../teachers/ResourceList"
 import { LessonsList } from "../teachers/LessonsList"
 import { StudentLessonList } from "../teachers/StudentLessonList"
 import { NotificationsList } from "../teachers/Notifications"
+import { TeacherHome } from "../teachers/TeacherHome"
 
 export const TeacherViews = () => {
     return (
@@ -40,6 +41,9 @@ export const TeacherViews = () => {
                 <Route path="/lessons" element={<LessonsList />} />
                 <Route path="/lessons/:studentId" element={<StudentLessonList />} />
                 <Route path="/notifications" element={<NotificationsList />} />
+                <Route path="/home" element={<TeacherHome />} />
+
+
 
 
 

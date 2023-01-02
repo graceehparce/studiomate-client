@@ -1,0 +1,93 @@
+.duoPicBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.messageBubble {
+    background-color: #ebcec3;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.messageBubble2 {
+    background-color: #d0c4c0;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.nameBadge {
+    margin-left: 20px;
+}
+
+.idMessage {
+    font-weight: 300;
+    font-size: small;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+}
+
+.messageId2 {
+    font-weight: 300;
+    font-size: small;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: right;
+}
+
+.messageArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 10px;
+    width: 400px;
+}
+
+.sendButton {
+    margin-top: 5px;
+}
+
+.messageInput {
+    margin-bottom: 0px;
+}
+
+.scrollArea {
+    margin: 20px;
+}
+
+.labelBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+}
+
+.messageBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.messageImg {
+    margin: 3px;
+}
+
+.messageContent {
+    font-weight: 800;
+}
+
+.messageContent2 {
+    font-weight: 800;
+    text-align: right;
+}
