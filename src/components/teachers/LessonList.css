@@ -1,0 +1,22 @@
+.lessonBox {
+    background-color: #f8efeb;
+    border-radius: 30px;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lessonPicBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.insteadOfNav {
+    margin-top: 20px;
+}

@@ -5,6 +5,10 @@ import { getMyStudent } from "../managers/StudentManager"
 import { getMyTeacher } from "../managers/TeacherManager"
 import { createMessage } from "../managers/MessageManager"
 import { getMessagesByStudent } from "../managers/MessageManager"
+import { ScrollArea, Button, Stack, Group, TextInput, Card, Text, Badge, Avatar } from '@mantine/core';
+import { IconSwitchHorizontal } from "@tabler/icons"
+import "./studentMessages.css"
+import { IconMessages } from "@tabler/icons"
 
 export const MessagesByStudent = () => {
     const [messages, setMessages] = useState([])
@@ -54,46 +58,131 @@ export const MessagesByStudent = () => {
 
     }, [student])
 
+    const formatDate = (project) => {
+        let initialSplit = project.split("T")
+        let formattedDate = initialSplit[0]
+        formattedDate = formattedDate.split("-")
+        formattedDate = [formattedDate[1], formattedDate[2], formattedDate[0]]
+        let finishedDate = formattedDate.join("/")
+        let formattedTime = initialSplit[1]
+        formattedTime = formattedTime.split(':')
+        formattedTime = [formattedTime[0], formattedTime[1]]
+        let finishedTime = formattedTime.join(":")
+        return `${finishedDate}, ${finishedTime}`
+    }
+
 
     return (
-        <article>
-            <h1>Messages</h1>
-            <img className="student_img" src={student.img} alt=""></img>and
-            <img className="teacher_img" src={teacher.img} alt=""></img>
+        <div className="insteadOfNav" style={{
+            width: 600, marginLeft: 'auto', marginRight: 'auto'
+        }}>
+            <Card shadow="sm" px={30} p="md" radius="lg" withBorder>
+                <Card.Section shadow="sm" px={30} p="md" radius="lg" withBorder>
 
-            {
-                messages.map(message => {
-                    return <section key={`message--${message.id}`} className="message">
-                        <div>{message.sender.first_name}{message.date_time}</div>
-                        <div>{message.content}</div>
-                    </section>
-                })
-            }
-            <form className="messageForm">
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="message">Message: </label>
-                        <input type="text" name="content" required autoFocus className="form-control"
+                    <div className="duoPicBox">
+                        <Avatar
+                            radius="xl"
+                            height={100}
+                            width="auto"
+                            src={student.img}
+                            alt="Student"
+                            fit="contain"
+                        />
+                        <IconSwitchHorizontal />
+                        <Avatar
+                            radius="xl"
+                            height={100}
+                            width="auto"
+                            src={teacher.img}
+                            alt="Student"
+                            fit="contain"
+                        />
+                    </div>
+                    <Text className="messageTitle">Messages</Text>
+                    <div className="labelBox">
+                        <Badge
+                            className="nameBadge"
+                            size="lg"
+                            color="orangy"
+                            variant="outline"
+                            radius={30} >
+                            {teacher.full_name} & {student.full_name}
+                        </Badge>
+                    </div>
+                </Card.Section>
+                <Stack align="center">
+                    <ScrollArea className="scrollArea" style={{ width: 400, height: 300 }} >
+                        {
+                            messages.map(message => {
+                                if (message.sender.id === teacher.user.id) {
+                                    const dateTime = formatDate(message.date_time)
+                                    return <section className="messageBubble" key={`message--${message.id}`} >
+                                        <Avatar
+                                            className="messageImg"
+                                            radius={100}
+                                            height={20}
+                                            width="auto"
+                                            src={teacher.img}
+                                            alt="Student"
+                                            fit="contain"
+                                        />
+                                        <div className="idMessage">
+                                            <div className="dateSection2">{dateTime}</div>
+                                            <div className="messageContent">{message.content}</div>
+                                        </div>
+
+                                    </section>
+                                }
+                                else {
+                                    const dateTime = formatDate(message.date_time)
+                                    return <section className="messageBubble2" key={`message--${message.id}`} >
+                                        <div className="messageId2">
+                                            <div className="dateSection">{dateTime}</div>
+                                            <div className="messageContent2">{message.content}</div>
+                                        </div>
+                                        <Avatar
+                                            className="messageImg"
+                                            radius={100}
+                                            height={20}
+                                            width="auto"
+                                            src={student.img}
+                                            alt="Student"
+                                            fit="contain"
+                                        />
+                                    </section>
+                                }
+                            })
+                        }
+                    </ScrollArea>
+                </Stack>
+                <div className="messageBox">
+                    <Group className="messageArea" position="center" grow>
+                        <TextInput size="md" placeholder="" label="New Message:" type="text" name="content" required autoFocus className="messageInput"
                             value={currentMessage.content}
                             onChange={changeMessageState}
                         />
-                    </div>
-                </fieldset>
-                <button type="submit"
-                    onClick={evt => {
-                        evt.preventDefault()
+                        <Button
+                            variant="light"
+                            color="orangy"
+                            radius={20}
+                            type="submit"
+                            className="sendButton"
+                            onClick={evt => {
+                                evt.preventDefault()
 
-                        const message = {
-                            content: currentMessage.content,
-                            recipient: teacher.user.id
-                        }
+                                const message = {
+                                    content: currentMessage.content,
+                                    recipient: teacher.user.id
+                                }
 
-                        createMessage(message)
-                            .then(() => createMessageNotification(notification))
-                            .then(() => window.location.reload())
-                    }}
-                    className="btn btn-primary">Send</button>
-            </form >
-        </article>
+                                createMessage(message)
+                                    .then(() => createMessageNotification(notification))
+                                    .then(() => window.location.reload())
+                            }}
+                        >Send</Button>
+                    </Group>
+                </div>
+            </Card>
+        </div>
     )
 }

@@ -1,0 +1,10 @@
+.profilePic {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.insteadOfNav {
+    margin-top: 20px;
+}

@@ -5,6 +5,11 @@ import { getAssignments } from "../managers/AssignmentManager"
 import { useParams } from "react-router-dom"
 import { Link } from "react-router-dom"
 import { getStudent } from "../managers/StudentManager"
+import { Card, Title, Image, Button, Badge } from "@mantine/core"
+import "./AssignmentList.css"
+import { IconPencil } from "@tabler/icons"
+
+
 
 export const AssignmentList = () => {
     const [assignments, setAssignments] = useState([])
@@ -28,28 +33,70 @@ export const AssignmentList = () => {
 
 
     return (
-        <article>
-            <h1>{student.full_name}'s assignments:</h1>
-            <img className="student_img" src={student.img} alt=""></img>
-            {
-                assignments.map(assignment => {
-                    return <section key={`assignment--${assignment.id}`} className="assignment">
-                        <Link className="assignment_profile" to={`/assignment/${assignment.id}`}>Assignments {assignment.date_created}</Link>
-                    </section>
-                })
-            }
+        <div className="insteadOfNav" style={{ width: 500, marginLeft: 'auto', marginRight: 'auto' }}>
+            <Card shadow="lg" px={30} p="md" radius="lg" withBorder>
+                <Card.Section shadow="sm" px={30} p="md" radius="lg" withBorder>
+                    <div className="assignmentPicBox" style={{ width: 'auto', marginLeft: 'auto', marginRight: 'auto' }}>
+                        {
+                            SMTokenObject.is_staff === true
+                                ?
+                                <Link to={`/students/${student.id}`}>
+                                    <Image
+                                        radius={100}
+                                        height={100}
+                                        width="auto"
+                                        src={student.img}
+                                        alt="Student"
+                                        fit="contain"
+                                    />
+                                </Link>
+                                :
+                                <Link to={`/myStudentProfile`}>
+                                    <Image
+                                        radius={100}
+                                        height={100}
+                                        width="auto"
+                                        src={student.img}
+                                        alt="Student"
+                                        fit="contain"
+                                    />
+                                </Link>
+                        }
+                        <h2 className="assignmentListHeading">{student.full_name}'s Assignments</h2>
 
-            {
-                SMTokenObject.is_staff === true
-                    ?
+                    </div>
+                </Card.Section>
+                <div className="listSection">
+                    {
+                        SMTokenObject.is_staff === true
+                            ?
 
-                    <button className="new_assignment"
-                        onClick={() => {
-                            navigate({ pathname: `/assignmentForm/${studentId}` })
-                        }}>Create New Assignment</button>
-                    :
-                    ""
-            }
-        </article>
+                            <Button
+                                variant="light"
+                                color="orangy"
+                                radius={20}
+                                onClick={() => {
+                                    navigate({ pathname: `/assignmentForm/${studentId}` })
+                                }}>Create New Assignment</Button>
+                            :
+                            ""
+                    }
+                    {
+                        assignments.map(assignment => {
+                            return <section key={`assignment--${assignment.id}`} className="assignment">
+                                <Button
+                                    className="buttonList"
+                                    variant="outline"
+                                    color="orangy"
+                                    radius={20}
+                                    onClick={() => {
+                                        navigate({ pathname: `/assignment/${assignment.id}` })
+                                    }}>Assignments {assignment.date_created}</Button>
+                            </section>
+                        })
+                    }
+                </div>
+            </Card >
+        </div >
     )
 }

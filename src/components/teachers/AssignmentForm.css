@@ -1,0 +1,47 @@
+.inputBox {
+    border-radius: 20px;
+    border: 2px solid #BB5A36;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.assignmentForm_title {
+    font-family: 'Raleway';
+    font-weight: 900;
+    margin-top: 10px;
+}
+
+.picBorder {
+    border-radius: 5px solid #816156;
+}
+
+.badge {
+    margin-bottom: 20px;
+}
+
+.buttonCreate {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.assignmentForm {
+    background-color: #f8efeb;
+}
+
+.insteadOfNav {
+    margin-top: 20px;
+}
+
+.datePicker {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+.dateLabel {
+    margin-right: 50px;
+}

@@ -1,0 +1,20 @@
+.buttonListSection {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.picBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonListProfile {
+    margin-top: 10px;
+}
+
+.insteadOfNav {
+    margin-top: 20px;
+}

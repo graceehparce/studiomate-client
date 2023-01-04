@@ -5,6 +5,11 @@ import { getStudent } from "../managers/StudentManager"
 import { getStudentLessons } from "../managers/RequestManager"
 import { createRequest } from "../managers/RequestManager"
 import { deleteRequest } from "../managers/RequestManager"
+import { Avatar, Button, Card, Image } from "@mantine/core"
+import { Link } from "react-router-dom"
+import "./StudentLessonList.css"
+import { DatePicker, TimeInput } from "@mantine/dates"
+
 
 export const StudentLessonList = () => {
     const localSM = localStorage.getItem("sm_token")
@@ -27,7 +32,8 @@ export const StudentLessonList = () => {
     }, [])
 
     useEffect(() => {
-        getStudent(studentId).then(data => setStudent(data))
+        getStudent(studentId)
+            .then(data => setStudent(data))
     }, [])
 
     const changeRequestState = (domEvent) => {
@@ -71,117 +77,181 @@ export const StudentLessonList = () => {
         })
     }
 
+    const formatDate = (project) => {
+        let formattedDate = project.split("T")
+        formattedDate = formattedDate[0]
+        formattedDate = formattedDate.split("-")
+        formattedDate = [formattedDate[1], formattedDate[2], formattedDate[0]]
+        return formattedDate.join("/")
+    }
+    const formatTime = (project) => {
+        let formattedTime = project.split(':')
+        formattedTime = [formattedTime[0], formattedTime[1]]
+        return formattedTime.join(":")
+    }
+
 
     return (
-        <article>
-            <h1>{student.full_name}'s Upcoming Lessons:</h1>
-            <img className="student_img" src={student.img} alt=""></img>
-            <h2> Accepted Lessons</h2>
-            {
-                lessons.map(lesson => {
-                    if (lesson.accepted === true) {
-                        return <div>Lesson on {lesson.date} at {lesson.time}</div>
-                    }
-                    else {
-                        return ""
-                    }
-                })
-            }
-
-            <h2>Not Yet Accepted Lessons</h2>
-            {
-                lessons.map(lesson => {
-                    if (lesson.accepted === false) {
-
-                        if (SMTokenObject.is_staff === true) {
-
-                            return <div>Lesson on {lesson.date} at {lesson.time}</div>
+        <div className="insteadOfNav" style={{
+            width: 600, marginLeft: 'auto', marginRight: 'auto'
+        }}>
+            <Card shadow="sm" px={30} p="md" radius="lg" withBorder>
+                <Card.Section shadow="sm" px={30} p="md" radius="lg" withBorder>
+                    <div className="headBox">
+                        {
+                            SMTokenObject.is_staff === true
+                                ?
+                                <Link to={`/students/${student.id}`}>
+                                    <Avatar
+                                        radius={100}
+                                        height={80}
+                                        width="auto"
+                                        src={student.img}
+                                        alt="Student"
+                                        fit="contain"
+                                    />
+                                </Link>
+                                :
+                                <Link to={`/myStudentProfile`}>
+                                    <Image
+                                        radius={100}
+                                        height={100}
+                                        width="auto"
+                                        src={student.img}
+                                        alt="Student"
+                                        fit="contain"
+                                    />
+                                </Link>
                         }
-                        else {
-                            return <div>
-                                <div>Lesson on {lesson.date} at {lesson.time}</div>
-                                <button type="submit"
-                                    onClick={evt => {
-                                        evt.preventDefault()
+                        <h2>{student.full_name}'s Upcoming Lessons:</h2>
+                    </div>
+                </Card.Section>
+                <Card.Section className="bodySection">
+                    <h3> Accepted Lessons</h3>
+                    {
+                        lessons.map(lesson => {
+                            if (lesson.accepted === true) {
+                                const date = formatDate(lesson.date)
+                                const time = formatTime(lesson.time)
+                                return <div className="listLessons">Lesson on {date} at {time}</div>
+                            }
+                            else {
+                                return ""
+                            }
+                        })
+                    }
 
-                                        const acceptedRequest = {
-                                            id: lesson.id,
-                                            accepted: true
-                                        }
+                    <h3>Not Yet Accepted Lessons</h3>
+                    {
+                        lessons.map(lesson => {
+                            if (lesson.accepted === false) {
 
-                                        updateRequest(acceptedRequest)
-                                            .then(() => createRequestNotificationFromStudent(notification))
-                                            .then(() => window.location.reload())
-                                    }}
-                                    className="btn btn-primary">Accept</button>
-                                <button type="submit"
-                                    onClick={evt => {
-                                        evt.preventDefault()
+                                if (SMTokenObject.is_staff === true) {
+                                    const date = formatDate(lesson.date)
+                                    const time = formatTime(lesson.time)
+                                    return <div className="listLessons">Lesson on {date} at {time}</div>
+                                }
+                                else {
+                                    const date = formatDate(lesson.date)
+                                    const time = formatTime(lesson.time)
+                                    return <div className="decideBox">
+                                        <div>Lesson on {date} at {time}</div>
+                                        <div className="twoButtons">
+                                            <Button className="decideButton"
+                                                variant="light"
+                                                color="orangy"
+                                                radius={20}
+                                                type="submit"
+                                                onClick={evt => {
+                                                    evt.preventDefault()
 
-                                        deleteRequest(lesson.id)
-                                            .then(() => window.location.reload())
-                                    }}
-                                    className="btn btn-primary">Decline</button>
-                            </div>
+                                                    const acceptedRequest = {
+                                                        id: lesson.id,
+                                                        accepted: true
+                                                    }
+
+                                                    updateRequest(acceptedRequest)
+                                                        .then(() => createRequestNotificationFromStudent(notification))
+                                                        .then(() => window.location.reload())
+                                                }}
+                                            >Accept</Button>
+                                            <Button
+                                                className="decideButton"
+                                                variant="dark"
+                                                color="orangy"
+                                                radius={20} type="submit"
+                                                onClick={evt => {
+                                                    evt.preventDefault()
+
+                                                    deleteRequest(lesson.id)
+                                                        .then(() => window.location.reload())
+                                                }}
+                                            >Decline</Button>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else {
+                                return ""
+                            }
+                        })
+                    }
+                    <div className="buttonBox">
+
+                        {
+                            SMTokenObject.is_staff === true
+                                ?
+
+                                <Button
+                                    className="formButton"
+                                    variant="light"
+                                    color="orangy"
+                                    radius={20}
+                                    type="submit" onClick={() => setShowForm(!showForm)}>Send Lesson Request</Button>
+
+                                :
+                                ""
+
                         }
-                    }
-                    else {
-                        return ""
-                    }
-                })
-            }
-
-            {
-                SMTokenObject.is_staff === true
-                    ?
-
-                    <button onClick={() => setShowForm(!showForm)}>Send Lesson Request</button>
-
-                    :
-                    ""
-
-            }
-            {
-                showForm
-                    ?
-                    <form>
-                        <h2>New Lesson Request</h2>
-                        <fieldset>
-                            <div className="form-group">
-                                <label htmlFor="date">Lesson Date: </label>
-                                <input type="date" name="date" required autoFocus className="form-control"
+                    </div>
+                </Card.Section>
+                <div className="centerForm">
+                    {
+                        showForm
+                            ?
+                            <div className="formSection">
+                                <h3>New Lesson Request</h3>
+                                <DatePicker size="sm" placeholder="pick a date" label="Lesson Date:" name="date" type="date"
                                     value={newRequest.date}
                                     onChange={changeRequestState}
                                 />
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <div className="form-group">
-                                <label htmlFor="time">Lesson Time: </label>
-                                <input type="time" name="time" required autoFocus className="form-control"
+                                <TimeInput label="Lesson Time:" type="time" name="time" required autoFocus className="form-control"
                                     value={newRequest.time}
                                     onChange={changeRequestState}
                                 />
-                            </div>
-                        </fieldset>
-                        <button type="submit"
-                            onClick={evt => {
-                                evt.preventDefault()
+                                <Button variant="light"
+                                    color="orangy"
+                                    radius={20}
+                                    type="submit"
+                                    onClick={evt => {
+                                        evt.preventDefault()
 
-                                const request = {
-                                    student: parseInt(studentId),
-                                    date: newRequest.date,
-                                    time: newRequest.time,
-                                }
+                                        const request = {
+                                            student: parseInt(studentId),
+                                            date: newRequest.date,
+                                            time: newRequest.time,
+                                        }
 
-                                createRequest(request)
-                                    .then(() => createRequestNotificationFromTeacher(notification))
-                                    .then(() => window.location.reload())
-                            }}
-                            className="btn btn-primary">Send</button>
-                    </form >
-                    :
-                    ""}
-        </article>
+                                        createRequest(request)
+                                            .then(() => createRequestNotificationFromTeacher(notification))
+                                            .then(() => window.location.reload())
+                                    }}
+                                    className="lessonSubmit">Submit</Button>
+                            </div >
+                            :
+                            ""}
+                </div>
+            </Card>
+        </div >
     )
 }

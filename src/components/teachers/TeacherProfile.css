@@ -1,0 +1,14 @@
+.editSection {
+    padding: 10px;
+}
+
+.bigSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.insteadOfNav {
+    margin-top: 20px;
+}

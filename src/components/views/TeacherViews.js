@@ -15,14 +15,13 @@ import { ResourceList } from "../teachers/ResourceList"
 import { LessonsList } from "../teachers/LessonsList"
 import { StudentLessonList } from "../teachers/StudentLessonList"
 import { NotificationsList } from "../teachers/Notifications"
+import { TeacherHome } from "../teachers/TeacherHome"
 
 export const TeacherViews = () => {
     return (
         <Routes>
             <Route path="/" element={
                 <>
-                    <h1>StudioMate</h1>
-                    <div>The one stop shop for you and your studiomates!</div>
 
                     <Outlet />
                 </>
@@ -42,6 +41,9 @@ export const TeacherViews = () => {
                 <Route path="/lessons" element={<LessonsList />} />
                 <Route path="/lessons/:studentId" element={<StudentLessonList />} />
                 <Route path="/notifications" element={<NotificationsList />} />
+                <Route path="/home" element={<TeacherHome />} />
+
+
 
 
 

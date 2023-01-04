@@ -1,6 +1,10 @@
 import React, { useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { loginUser } from "../managers/AuthManager"
+import logo from "../images/Mate.png"
+import { Button, Image, TextInput, Card, Group, BackgroundImage } from "@mantine/core"
+import "./Login.css"
+import piano from "../images/RectangleKeys.jpg"
 
 export const Login = () => {
     const username = useRef()
@@ -18,7 +22,7 @@ export const Login = () => {
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res && "is_staff" in res) {
                     localStorage.setItem("sm_token", JSON.stringify(res))
-                    navigate("/")
+                    navigate("/home")
                 }
                 else {
                     invalidDialog.current.showModal()
@@ -27,35 +31,43 @@ export const Login = () => {
     }
 
     return (
-        <main className="container--login">
-            <dialog className="dialog dialog--auth" ref={invalidDialog}>
-                <div>Username or password was not valid.</div>
-                <button className="button--close" onClick={e => invalidDialog.current.close()}>Close</button>
-            </dialog>
-            <section>
-                <form className="form--login" onSubmit={handleLogin}>
-                    <h1>StudioMate</h1>
-                    <h2>Please sign in</h2>
-                    <fieldset>
-                        <label htmlFor="inputUsername"> Username </label>
-                        <input ref={username} type="username" id="username" className="form-control" placeholder="Username address" required autoFocus />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="inputPassword"> Password </label>
-                        <input ref={password} type="password" id="password" className="form-control" placeholder="Password" required />
-                    </fieldset>
-                    <fieldset style={{
-                        textAlign: "center"
-                    }}>
-                        <button className="btn btn-1 btn-sep icon-send" type="submit">Sign In</button>
-                    </fieldset>
-                </form>
-            </section>
-            <section className="link--register">
-                <Link to="/registerStudent">New Student?</Link>
-                <Link to="/registerTeacher">New Teacher?</Link>
-            </section>
-        </main>
+        <div className="setBackground">
+            <BackgroundImage className="backgroundImg" src={piano} fit="contain"
+            >
+                <div className="loginBox" style={{
+                    width: 700, marginLeft: 'auto', marginRight: 'auto'
+                }}>
+                    <Card shadow="lg" px={30} radius="lg" withBorder>
+                        <dialog className="dialog dialog--auth" ref={invalidDialog}>
+                            <div>Username or password was not valid.</div>
+                            <button className="button--close" onClick={e => invalidDialog.current.close()}>Close</button>
+                        </dialog>
+                        <section className="mainSection">
+                            <form onSubmit={handleLogin}>
+                                <Image className="logoPicLogin" height={120} fit="contain" src={logo} alt="StudentImg" />
+                                <div className="loginHeader">Please sign in:</div>
+                                <TextInput label="Username:" ref={username} type="username" id="username" className="form-control" placeholder="Username address" required autoFocus />
+                                <TextInput label="Password:" ref={password} type="password" id="password" className="form-control" placeholder="Password" required />
+                                <Group position="center" spacing='sm' grow>
+                                    <Button
+                                        variant="light"
+                                        color="orangy"
+                                        radius={20}
+                                        type="submit"
+                                        className="signInButton" >
+                                        Sign In
+                                    </Button>
+                                </Group>
+                                <section className="registerSection">
+                                    <Link className="linkRegister1" to="/registerStudent">New Student?</Link>
+                                    <Link className="linkRegister2" to="/registerTeacher">New Teacher?</Link>
+                                </section>
+                            </form>
+                        </section>
+                    </Card>
+                </div>
+            </BackgroundImage >
+        </div>
     )
 }
 
