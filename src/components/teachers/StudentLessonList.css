@@ -31,6 +31,7 @@
     margin: 10px;
     padding: 10px;
     margin-top: 20px;
+    background-color: #f8efeb;
 }
 
 .centerForm {
@@ -60,4 +61,8 @@
     background-color: #e4bdaf;
     border-radius: 30px;
     padding: 10px;
+}
+
+.insteadOfNav {
+    margin-top: 20px;
 }

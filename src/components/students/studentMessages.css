@@ -3,21 +3,26 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
 }
 
 .messageBubble {
     background-color: #ebcec3;
     margin-top: 10px;
     border-radius: 10px;
-    padding: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
 }
 
 .messageBubble2 {
     background-color: #d0c4c0;
     margin-top: 10px;
     border-radius: 10px;
-    padding: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
 }
 
 .nameBadge {
@@ -28,18 +33,21 @@
     font-weight: 300;
     font-size: small;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: left;
     justify-content: left;
+    margin-left: 5px;
 }
 
 .messageId2 {
     font-weight: 300;
     font-size: small;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    align-items: right;
     justify-content: right;
+    margin-right: 5px;
+
 }
 
 .messageArea {
@@ -85,9 +93,25 @@
 
 .messageContent {
     font-weight: 800;
+    font-size: medium;
 }
 
 .messageContent2 {
     font-weight: 800;
     text-align: right;
+    font-size: medium;
+}
+
+.dateSection {
+    text-align: right;
+    margin-bottom: 5px;
+}
+
+.dateSection2 {
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.insteadOfNav {
+    margin-top: 20px;
 }

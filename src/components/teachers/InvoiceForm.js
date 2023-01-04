@@ -61,12 +61,13 @@ export const InvoiceForm = () => {
     }
 
     return (
-        <div style={{
-            width: 700, marginLeft: 'auto', marginRight: 'auto'
+        <div className="insteadOfNav" style={{
+            width: 600, marginLeft: 'auto', marginRight: 'auto'
         }}>
-            <Card shadow="lg" px={30} p="md" radius="lg" withBorder>
+            <Card className="assignmentForm" shadow="lg" px={30} p="md" radius="lg" withBorder>
 
-                <Link className="picBorder" to={`/students/${studentId}`}>
+                < Link className="picBorder" to={`/students/${studentId}`
+                }>
                     <Image
                         radius={100}
                         height={90}
@@ -75,28 +76,33 @@ export const InvoiceForm = () => {
                         alt="Student"
                         fit="contain"
                     />
-                </Link>
+                </Link >
                 <h2 className="assignmentForm_title">Create New Invoice</h2>
                 <Badge
                     className="badge"
                     size="xl"
-                    color="browny"
-                    variant="light"
+                    color="orangy"
+                    variant="dark"
                     radius={30} >{teacher.full_name}
                     <IconSquareArrowRight />
                     {student.full_name}
                 </Badge>
 
                 <div className="inputBox">
-
-                    <DatePicker size="md" placeholder="pick a date!" label="Today's Date:" type="date" name="date_created" required autoFocus withAsterick className="form-control"
-                        value={currentInvoice.date_created}
-                        onChange={changeInvoiceState}
-                    />
-                    <DatePicker size="md" placeholder="pick a date" label="Date of Service:" type="date" name="service_date" required autoFocus withAsterick className="form-control"
-                        value={currentInvoice.service_date}
-                        onChange={changeInvoiceState}
-                    />
+                    <div className="datePicker">
+                        <label className="dateLabel">Today's Date:</label>
+                        <input size="md" placeholder="pick a date!" label="Today's Date:" type="date" name="date_created" withAsterick
+                            value={currentInvoice.date_created}
+                            onChange={changeInvoiceState}
+                        />
+                    </div>
+                    <div className="datePicker">
+                        <label className="dateLabel">Date of Service: </label>
+                        <input size="md" placeholder="pick a date" label="Date of Service:" type="date" name="service_date" required autoFocus withAsterick className="form-control"
+                            value={currentInvoice.service_date}
+                            onChange={changeInvoiceState}
+                        />
+                    </div>
                     <TextInput size="md" placeholder="$" label="Cost of Service:" withAsterick type="amount" name="amount" required autoFocus className="form-control"
                         value={currentInvoice.amount}
                         onChange={changeInvoiceState}
@@ -131,7 +137,7 @@ export const InvoiceForm = () => {
                         className="btn btn-primary">Create</Button>
                 </Group>
             </Card >
-        </div>
+        </div >
     )
 }
 

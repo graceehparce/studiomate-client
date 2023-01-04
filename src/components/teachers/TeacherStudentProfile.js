@@ -21,7 +21,7 @@ export const TeacherStudentProfile = () => {
 
 
     return (
-        <div style={{ width: 400, marginLeft: 'auto', marginRight: 'auto' }}>
+        <div className="insteadOfNav" style={{ width: 400, marginLeft: 'auto', marginRight: 'auto' }}>
             <Card shadow="sm" px={30} p="md" radius="lg" withBorder>
                 <Card.Section shadow="sm" px={30} p="md" radius="lg" withBorder>
                     <div className="picBox" style={{ width: 280, marginLeft: 'auto', marginRight: 'auto' }}>

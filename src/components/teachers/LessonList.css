@@ -1,27 +1,18 @@
-.notSection {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #ebcec3;
+.lessonBox {
+    background-color: #f8efeb;
     border-radius: 30px;
     padding: 10px;
     margin-top: 5px;
     margin-bottom: 5px;
-}
-
-.notText {
-    color: black;
-    text-decoration: none;
-    font-weight: 700;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
 
-.notHeading {
+.lessonPicBox {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }

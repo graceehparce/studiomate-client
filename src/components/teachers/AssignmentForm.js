@@ -63,10 +63,10 @@ export const AssignmentForm = () => {
 
 
     return (
-        <div style={{
-            width: 700, marginLeft: 'auto', marginRight: 'auto'
+        <div className="insteadOfNav" style={{
+            width: 600, marginLeft: 'auto', marginRight: 'auto'
         }}>
-            <Card shadow="lg" px={30} p="md" radius="lg" withBorder>
+            <Card className="assignmentForm" shadow="lg" px={30} p="md" radius="lg" withBorder>
                 <Link className="picBorder" to={`/students/${studentId}`}>
                     <Image
                         radius={100}
@@ -81,8 +81,8 @@ export const AssignmentForm = () => {
                 <Badge
                     className="badge"
                     size="xl"
-                    color="browny"
-                    variant="light"
+                    color="orangy"
+                    variant="dark"
                     radius={30} >{teacher.full_name}
                     <IconSquareArrowRight />
                     {student.full_name}

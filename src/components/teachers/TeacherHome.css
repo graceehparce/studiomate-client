@@ -1,0 +1,17 @@
+.backgroundSection {
+    background-image: url("../images/MorePiano.jpg");
+    background-size: cover;
+    padding-top: 100px;
+    padding-bottom: 350px;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcomeText {
+    font-size: xx-large;
+    font-weight: 700;
+    margin-bottom: 20px;
+}

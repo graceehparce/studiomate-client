@@ -5,12 +5,10 @@ import { getStudent } from "../managers/StudentManager"
 import { getStudentLessons } from "../managers/RequestManager"
 import { createRequest } from "../managers/RequestManager"
 import { deleteRequest } from "../managers/RequestManager"
-import { Button, Card, Image, Badge } from "@mantine/core"
-import { IconCalendar } from "@tabler/icons"
+import { Avatar, Button, Card, Image } from "@mantine/core"
 import { Link } from "react-router-dom"
-import { getSingleTeacher, getTeacher } from "../managers/TeacherManager"
 import "./StudentLessonList.css"
-import { DatePicker, DateRangePicker, TimeInput } from "@mantine/dates"
+import { DatePicker, TimeInput } from "@mantine/dates"
 
 
 export const StudentLessonList = () => {
@@ -18,7 +16,6 @@ export const StudentLessonList = () => {
     const SMTokenObject = JSON.parse(localSM)
     const [lessons, setLessons] = useState([])
     const [student, setStudent] = useState({})
-    const [teacher, setTeacher] = useState({})
     const [showForm, setShowForm] = useState(false)
     const { studentId } = useParams()
     const [newRequest, setNewRequest] = useState({
@@ -37,9 +34,6 @@ export const StudentLessonList = () => {
     useEffect(() => {
         getStudent(studentId)
             .then(data => setStudent(data))
-            .then(getSingleTeacher(student?.teacher?.id)
-                .then(data => setTeacher(data))
-            )
     }, [])
 
     const changeRequestState = (domEvent) => {
@@ -98,7 +92,7 @@ export const StudentLessonList = () => {
 
 
     return (
-        <div style={{
+        <div className="insteadOfNav" style={{
             width: 600, marginLeft: 'auto', marginRight: 'auto'
         }}>
             <Card shadow="sm" px={30} p="md" radius="lg" withBorder>
@@ -108,9 +102,9 @@ export const StudentLessonList = () => {
                             SMTokenObject.is_staff === true
                                 ?
                                 <Link to={`/students/${student.id}`}>
-                                    <Image
+                                    <Avatar
                                         radius={100}
-                                        height={100}
+                                        height={80}
                                         width="auto"
                                         src={student.img}
                                         alt="Student"
@@ -129,20 +123,11 @@ export const StudentLessonList = () => {
                                     />
                                 </Link>
                         }
-                        <h1>{student.full_name}'s Upcoming Lessons:</h1>
-                        <Badge
-                            className="nameBadge"
-                            size="xl"
-                            color="browny"
-                            variant="light"
-                            radius={30} >
-                            <IconCalendar />
-                            {teacher.full_name} & {student.full_name}
-                        </Badge>
+                        <h2>{student.full_name}'s Upcoming Lessons:</h2>
                     </div>
                 </Card.Section>
                 <Card.Section className="bodySection">
-                    <h2> Accepted Lessons</h2>
+                    <h3> Accepted Lessons</h3>
                     {
                         lessons.map(lesson => {
                             if (lesson.accepted === true) {
@@ -156,7 +141,7 @@ export const StudentLessonList = () => {
                         })
                     }
 
-                    <h2>Not Yet Accepted Lessons</h2>
+                    <h3>Not Yet Accepted Lessons</h3>
                     {
                         lessons.map(lesson => {
                             if (lesson.accepted === false) {
@@ -236,7 +221,7 @@ export const StudentLessonList = () => {
                             ?
                             <div className="formSection">
                                 <h3>New Lesson Request</h3>
-                                <DatePicker size="sm" placeholder="pick a date" label="Lesson Date:" name="date"
+                                <DatePicker size="sm" placeholder="pick a date" label="Lesson Date:" name="date" type="date"
                                     value={newRequest.date}
                                     onChange={changeRequestState}
                                 />

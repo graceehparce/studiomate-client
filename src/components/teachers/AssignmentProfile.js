@@ -20,7 +20,7 @@ export const AssignmentProfile = () => {
 
 
     return (
-        <div style={{
+        <div className="insteadOfNav" style={{
             width: 700, marginLeft: 'auto', marginRight: 'auto'
         }}>
             <Card shadow="sm" px={30} p="md" radius="lg" withBorder>

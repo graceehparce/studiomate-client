@@ -3,17 +3,18 @@ import { getTeacher } from "../managers/TeacherManager"
 import { useEffect } from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import "./TeacherHome.css"
+import "./studentHome.css"
+import { getMyStudent } from "../managers/StudentManager"
 
 
 
 
-export const TeacherHome = () => {
-    const [teacher, setTeacher] = useState({})
+export const StudentHome = () => {
+    const [student, setStudent] = useState({})
     const navigate = useNavigate()
 
     useEffect(() => {
-        getTeacher().then(data => setTeacher(data[0]))
+        getMyStudent().then(data => setStudent())
     }, [])
 
     return (<div className="backgroundSection">

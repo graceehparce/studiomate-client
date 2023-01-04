@@ -28,7 +28,7 @@ export const InvoicesList = () => {
 
 
     return (
-        <div style={{ width: 500, marginLeft: 'auto', marginRight: 'auto' }}>
+        <div className="insteadOfNav" style={{ width: 500, marginLeft: 'auto', marginRight: 'auto' }}>
             <Card shadow="lg" px={30} p="md" radius="lg" withBorder>
                 <Card.Section shadow="sm" px={30} p="md" radius="lg" withBorder>
                     <div className="invoicePicBox" style={{ width: 'auto', marginLeft: 'auto', marginRight: 'auto' }}>

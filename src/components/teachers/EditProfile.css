@@ -5,3 +5,11 @@
     align-items: center;
     margin-top: 10px;
 }
+
+.editProfileForm {
+    background-color: #f8efeb;
+}
+
+.insteadOfNav {
+    margin-top: 20px;
+}

@@ -47,13 +47,15 @@ export const ResourceList = () => {
     return (
         <article className="resourceBody">
             <h1>{teacher.full_name}'s Resources:</h1>
-            <Group className="resourceBoxes">
+            <Group position="center" className="resourceBoxes">
                 {
                     resources.map(resource => {
-                        return <Card shadow="lg" px={50} p="lg" radius="lg" withBorder>
+                        return <Card shadow="lg" px={20} p="lg" radius="lg" withBorder>
                             <div className="resourceLabel">
-                                <Image src={resource.img} className="resource_img" style={{ width: '100px', height: '150px' }} />
-                                <a className="text" target="_blank" href={resource.resource}>{resource.name}</a>
+                                <a className="text" target="_blank" href={resource.resource}>
+                                    <Image src={resource.img} className="resource_img" style={{ width: '80px', height: '120px' }} />
+                                    {resource.name}
+                                </a>
                                 <Button
                                     className="resourceButton"
                                     variant="filled"
@@ -88,7 +90,7 @@ export const ResourceList = () => {
                     <div style={{
                         width: 600, marginLeft: 'auto', marginRight: 'auto'
                     }}>
-                        <Card shadow="sm" px={30} p="md" radius="lg" withBorder>
+                        <Card className="newResourceForm" shadow="sm" px={30} p="md" radius="lg" withBorder>
                             <h2>New Resource</h2>
                             <TextInput label="Resource Name:" type="text" name="name" required autoFocus className="form-control"
                                 value={newResource.name}

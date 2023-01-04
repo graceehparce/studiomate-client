@@ -5,7 +5,7 @@ import { getMyStudent } from "../managers/StudentManager"
 import { getMyTeacher } from "../managers/TeacherManager"
 import { createMessage } from "../managers/MessageManager"
 import { getMessagesByStudent } from "../managers/MessageManager"
-import { ScrollArea, Button, Stack, Group, TextInput, Card, Image, Badge } from '@mantine/core';
+import { ScrollArea, Button, Stack, Group, TextInput, Card, Text, Badge, Avatar } from '@mantine/core';
 import { IconSwitchHorizontal } from "@tabler/icons"
 import "./studentMessages.css"
 import { IconMessages } from "@tabler/icons"
@@ -73,15 +73,15 @@ export const MessagesByStudent = () => {
 
 
     return (
-        <div style={{
+        <div className="insteadOfNav" style={{
             width: 600, marginLeft: 'auto', marginRight: 'auto'
         }}>
             <Card shadow="sm" px={30} p="md" radius="lg" withBorder>
                 <Card.Section shadow="sm" px={30} p="md" radius="lg" withBorder>
 
                     <div className="duoPicBox">
-                        <Image
-                            radius={100}
+                        <Avatar
+                            radius="xl"
                             height={100}
                             width="auto"
                             src={student.img}
@@ -89,8 +89,8 @@ export const MessagesByStudent = () => {
                             fit="contain"
                         />
                         <IconSwitchHorizontal />
-                        <Image
-                            radius={100}
+                        <Avatar
+                            radius="xl"
                             height={100}
                             width="auto"
                             src={teacher.img}
@@ -98,14 +98,14 @@ export const MessagesByStudent = () => {
                             fit="contain"
                         />
                     </div>
+                    <Text className="messageTitle">Messages</Text>
                     <div className="labelBox">
                         <Badge
                             className="nameBadge"
-                            size="xl"
-                            color="browny"
-                            variant="light"
+                            size="lg"
+                            color="orangy"
+                            variant="outline"
                             radius={30} >
-                            <IconMessages />
                             {teacher.full_name} & {student.full_name}
                         </Badge>
                     </div>
@@ -117,37 +117,38 @@ export const MessagesByStudent = () => {
                                 if (message.sender.id === teacher.user.id) {
                                     const dateTime = formatDate(message.date_time)
                                     return <section className="messageBubble" key={`message--${message.id}`} >
+                                        <Avatar
+                                            className="messageImg"
+                                            radius={100}
+                                            height={20}
+                                            width="auto"
+                                            src={teacher.img}
+                                            alt="Student"
+                                            fit="contain"
+                                        />
                                         <div className="idMessage">
-                                            <Image
-                                                className="messageImg"
-                                                radius={100}
-                                                height={40}
-                                                width="auto"
-                                                src={teacher.img}
-                                                alt="Student"
-                                                fit="contain"
-                                            />
-                                            <div >{dateTime}</div>
+                                            <div className="dateSection2">{dateTime}</div>
+                                            <div className="messageContent">{message.content}</div>
                                         </div>
-                                        <div className="messageContent">{message.content}</div>
+
                                     </section>
                                 }
                                 else {
                                     const dateTime = formatDate(message.date_time)
                                     return <section className="messageBubble2" key={`message--${message.id}`} >
                                         <div className="messageId2">
-                                            <div>{dateTime}</div>
-                                            <Image
-                                                className="messageImg"
-                                                radius={100}
-                                                height={40}
-                                                width="auto"
-                                                src={student.img}
-                                                alt="Student"
-                                                fit="contain"
-                                            />
+                                            <div className="dateSection">{dateTime}</div>
+                                            <div className="messageContent2">{message.content}</div>
                                         </div>
-                                        <div className="messageContent2">{message.content}</div>
+                                        <Avatar
+                                            className="messageImg"
+                                            radius={100}
+                                            height={20}
+                                            width="auto"
+                                            src={student.img}
+                                            alt="Student"
+                                            fit="contain"
+                                        />
                                     </section>
                                 }
                             })

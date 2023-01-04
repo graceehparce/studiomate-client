@@ -61,10 +61,10 @@ export const EditStudentProfile = () => {
     }
 
     return (
-        <div style={{
+        <div className="insteadOfNav" style={{
             width: 700, marginLeft: 'auto', marginRight: 'auto'
         }}>
-            <Card shadow="lg" px={30} p="md" radius="lg" withBorder>
+            <Card className="studentEditProfile" shadow="lg" px={30} p="md" radius="lg" withBorder>
                 <h2 className="assignmentForm_title">Edit Profile Here</h2>
                 <TextInput label="Phone Number:" placeholder={currentStudent.phone_number} type="text" name="phone_number" required autoFocus className="form-control"
                     value={currentStudent.phone_number}

@@ -3,7 +3,6 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
 }
 
 .messageBubble {
@@ -20,8 +19,18 @@
     padding: 15px;
 }
 
+.messageTitle {
+    text-align: center;
+    font-size: x-large;
+    font-weight: 700;
+}
+
 .nameBadge {
     margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .idMessage {
@@ -29,7 +38,6 @@
     font-size: small;
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: left;
 }
 
@@ -38,7 +46,6 @@
     font-size: small;
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: right;
 }
 
@@ -90,4 +97,8 @@
 .messageContent2 {
     font-weight: 800;
     text-align: right;
+}
+
+.insteadOfNav {
+    margin-top: 20px;
 }
