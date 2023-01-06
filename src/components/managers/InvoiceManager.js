@@ -33,3 +33,15 @@ export const createInvoice = (event) => {
     })
         .then(response => response.json())
 }
+
+const updateRequest = (request) => {
+    return fetch(`http://localhost:8000/requests/${request.id}`, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Token ${SMTokenObject.token}`,
+            'Accept': 'application/json',
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(request)
+    })
+}

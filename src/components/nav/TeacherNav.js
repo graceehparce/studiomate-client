@@ -34,7 +34,7 @@ export const TeacherNav = () => {
             </Link>
             <div className="navRightSection">
                 <Link className="avatar" to="/teacher">
-                    <Avatar height={100} radius="xl" src={teacher.img} alt="teacherImg" />
+                    <Avatar height={100} radius="xl" src={teacher?.img} alt="teacherImg" />
                 </Link>
 
                 <Modal opened={opened} onClose={close} size="sm">
@@ -43,7 +43,7 @@ export const TeacherNav = () => {
                         {
                             students.map(student => {
                                 return <Link to={`/messages/${student.id}`}>
-                                    <Avatar radius="xl" src={student.img} alt="studentPics" />
+                                    <Avatar size="lg" radius="xl" src={student.img} alt="studentPics" />
                                 </Link>
                             })
                         }

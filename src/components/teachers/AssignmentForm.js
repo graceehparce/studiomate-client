@@ -88,10 +88,13 @@ export const AssignmentForm = () => {
                     {student.full_name}
                 </Badge>
                 <div className="inputBox">
-                    <DatePicker size="md" placeholder="Assignment's Date" label="Date:" type="date" name="date_created" required autoFocus withAsterick className="form-control"
-                        value={currentAssignment.date_created}
-                        onChange={changeAssignmentState}
-                    />
+                    <div className="datePicker">
+                        <label className="dateLabel">Date:</label>
+                        <input size="md" placeholder="Assignment's Date" label="Date:" type="date" name="date_created" required autoFocus withAsterick className="form-control"
+                            value={currentAssignment.date_created}
+                            onChange={changeAssignmentState}
+                        />
+                    </div>
                     <TextInput size="md" placeholder="scales, arpeggios, technique exercises..." label="Fundamentals:" withAsterick type="fundamentals" name="fundamentals" required autoFocus className="form-control"
                         value={currentAssignment.fundamentals}
                         onChange={changeAssignmentState}

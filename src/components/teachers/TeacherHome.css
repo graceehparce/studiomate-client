@@ -1,8 +1,8 @@
 .backgroundSection {
     background-image: url("../images/MorePiano.jpg");
     background-size: cover;
-    padding-top: 100px;
-    padding-bottom: 350px;
+    padding-top: 75px;
+    padding-bottom: 385px;
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
@@ -13,5 +13,5 @@
 .welcomeText {
     font-size: xx-large;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }

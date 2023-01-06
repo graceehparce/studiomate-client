@@ -221,14 +221,20 @@ export const StudentLessonList = () => {
                             ?
                             <div className="formSection">
                                 <h3>New Lesson Request</h3>
-                                <DatePicker size="sm" placeholder="pick a date" label="Lesson Date:" name="date" type="date"
-                                    value={newRequest.date}
-                                    onChange={changeRequestState}
-                                />
-                                <TimeInput label="Lesson Time:" type="time" name="time" required autoFocus className="form-control"
-                                    value={newRequest.time}
-                                    onChange={changeRequestState}
-                                />
+                                <div className="datePicker">
+                                    <label className="dateLabel">Lesson Date:</label>
+                                    <input size="sm" placeholder="pick a date" label="Lesson Date:" name="date" type="date"
+                                        value={newRequest.date}
+                                        onChange={changeRequestState}
+                                    />
+                                </div>
+                                <div className="datePicker">
+                                    <label className="dateLabel">Lesson Time: </label>
+                                    <input label="Lesson Time:" type="time" name="time" required autoFocus className="form-control"
+                                        value={newRequest.time}
+                                        onChange={changeRequestState}
+                                    />
+                                </div>
                                 <Button variant="light"
                                     color="orangy"
                                     radius={20}

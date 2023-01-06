@@ -26,7 +26,7 @@ export const StudentNav = () => {
             </Link>
             <div className="navRightSection">
                 <Link className="avatar" to="/myStudentProfile">
-                    <Avatar height={100} radius="xl" src={student.img} alt="teacherImg" />
+                    <Avatar height={100} radius="xl" src={student?.img} alt="teacherImg" />
                 </Link>
                 <Group position="center">
                     <Button

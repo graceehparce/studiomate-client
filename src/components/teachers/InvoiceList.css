@@ -36,3 +36,18 @@
 .insteadOfNav {
     margin-top: 20px;
 }
+
+.badgeSection {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.invoiceBadge {
+    margin-bottom: 10px;
+    width: 200px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+}

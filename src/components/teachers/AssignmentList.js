@@ -63,24 +63,24 @@ export const AssignmentList = () => {
                                 </Link>
                         }
                         <h2 className="assignmentListHeading">{student.full_name}'s Assignments</h2>
+                        {
+                            SMTokenObject.is_staff === true
+                                ?
 
+                                <Button
+                                    variant="light"
+                                    color="orangy"
+                                    radius={20}
+                                    onClick={() => {
+                                        navigate({ pathname: `/assignmentForm/${studentId}` })
+                                    }}>Create New Assignment</Button>
+                                :
+                                ""
+                        }
                     </div>
                 </Card.Section>
                 <div className="listSection">
-                    {
-                        SMTokenObject.is_staff === true
-                            ?
 
-                            <Button
-                                variant="light"
-                                color="orangy"
-                                radius={20}
-                                onClick={() => {
-                                    navigate({ pathname: `/assignmentForm/${studentId}` })
-                                }}>Create New Assignment</Button>
-                            :
-                            ""
-                    }
                     {
                         assignments.map(assignment => {
                             return <section key={`assignment--${assignment.id}`} className="assignment">

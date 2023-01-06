@@ -110,7 +110,7 @@ export const MessagesByTeacher = () => {
                             className="nameBadge"
                             size="lg"
                             color="orangy"
-                            variant="outine"
+                            variant="light"
                             radius={30} >
                             {teacher.full_name} & {student.full_name}
                         </Badge>
