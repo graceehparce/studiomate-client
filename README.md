@@ -1,70 +1,75 @@
-# Getting Started with Create React App
+StudioMate
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+StudioMate is an administrative support application created to help private music teachers communicate more efficiently and effectively with their students. 
 
-## Available Scripts
+Application Overview
+As a music teacher, I always found myself scrambling, trying to remember if I emailed this person about their next lesson or whether or not that student paid me for last month. This application is dedicated to the teachers who love teaching but hate all the administrative tasks and organization required to run their own private teaching studio. Teachers can message their students, create assignments and invoices, send schedule requests and even store a body of resources they anticipate students will need in the future. It's the one-stop-shop admin app for teachers who need a little organizational support. 
 
-In the project directory, you can run:
+This project is my fullstack capstone, the culmination of a 6 month intensive full stack coding bootcamp. My goals were to explore the power of server side by incorporating complex logic on server side thereby lightening client side's responsibility. I also wanted to experiment with using a framework for my front-end styling and implement additional tools like cloudniary. 
 
-### `npm start`
+Features
+All users can create and edit their profiles
+Teachers can create assignements
+Teachers can create and update invoices
+Teachers can create and delete schedule requests
+Students can update schedule requests
+All users can create messages
+Teachers can create and delete resources
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Technology Used
+JavaScript
+Django
+Python
+React
+CSS
+HTML
+Mantine
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Running This Application
+Start Client Side
+Clone this repository and change to this directory in the terminal.
+git clone git clone git@github.com:graceehparce/studiomate-client.git
+cd studiomate-client
+Start development server
+npm install --save react-router-dom
+npm start
 
-### Code Splitting
+Start Server Side
+Clone the server repository and change to that directory in the terminal.
+git@github.com:graceehparce/studiomate-server.git
+cd studiomate-server
+Start virtual environment
+pipenv shell
+Start the debugger to run server
+python manage.py shell
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Demo User Login
+To view the application as a teacher, please sign in using the following credentials:
 
-### Analyzing the Bundle Size
+username: GParce
+password: Gracie
+To view the application as a student, please sign in using the following credentials:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+username: TClancy
+password: Tom
 
-### Making a Progressive Web App
+Demo
+In the making...please check back again!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+ERD
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
