@@ -56,12 +56,16 @@ python manage.py shell
 
 ###### Demo User Login 
 To view the application as a teacher, please sign in using the following credentials:
+```
 username: GParce 
 password: Gracie 
+```
 
 To view the application as a student, please sign in using the following credentials:
+```
 username: TClancy 
 password: Tom
+```
 
 ## Demo In the making...please check back again!
 
