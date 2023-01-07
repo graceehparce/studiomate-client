@@ -1,8 +1,9 @@
 
-const localSM = localStorage.getItem("sm_token")
-const SMTokenObject = JSON.parse(localSM)
+
 
 export const getTeachers = () => {
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
     return fetch("http://localhost:8000/teachers", {
         headers: {
             "Authorization": `Token ${SMTokenObject.token}`
@@ -12,6 +13,8 @@ export const getTeachers = () => {
 }
 
 export const getSingleTeacher = (teacherId) => {
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
     return fetch(`http://localhost:8000/teachers/${teacherId}`, {
         headers: {
             "Authorization": `Token ${SMTokenObject.token}`
@@ -21,6 +24,8 @@ export const getSingleTeacher = (teacherId) => {
 }
 
 export const getTeacher = () => {
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
 
     return fetch(`http://localhost:8000/teachers?status=myProfile`, {
         headers: {
@@ -33,6 +38,8 @@ export const getTeacher = () => {
 
 
 export const updateTeacher = (teacher) => {
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
     return fetch(`http://localhost:8000/teachers/${teacher}`, {
         method: "PUT",
         headers: {
@@ -45,7 +52,8 @@ export const updateTeacher = (teacher) => {
 }
 
 export const getMyTeacher = (studentId) => {
-
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
     return fetch(`http://localhost:8000/teachers?student=${studentId}`, {
         headers: {
             "Authorization": `Token ${SMTokenObject.token}`

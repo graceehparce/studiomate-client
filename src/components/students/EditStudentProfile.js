@@ -6,6 +6,7 @@ import { Button, TextInput, Card } from "@mantine/core"
 import "./editProfile.css"
 
 
+
 export const EditStudentProfile = () => {
 
     const localSM = localStorage.getItem("sm_token")
@@ -13,7 +14,7 @@ export const EditStudentProfile = () => {
     const { studentId } = useParams()
     const [currentStudent, setCurrentStudent] = useState({})
     const [teachers, setTeachers] = useState([])
-
+    const [upload, setImageState] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -29,6 +30,12 @@ export const EditStudentProfile = () => {
             setCurrentStudent(studentUser)
         })
     }, [])
+
+    useEffect(() => {
+        let tempStudent = currentStudent
+        tempStudent.img = upload
+        setCurrentStudent(tempStudent)
+    }, [upload])
 
     useEffect(
         () => {
@@ -55,9 +62,30 @@ export const EditStudentProfile = () => {
 
 
     const changeStudentState = (domEvent) => {
-        const newStudent = Object.assign({}, currentStudent)
+        let newStudent = Object.assign({}, currentStudent)
         newStudent[domEvent.target.name] = domEvent.target.value
-        setCurrentStudent(newStudent)
+        if (upload === false) {
+            setCurrentStudent(newStudent)
+        }
+        else {
+            newStudent.img = upload
+            setCurrentStudent(newStudent)
+        }
+    }
+
+    const showWidget = (clickEvent) => {
+        clickEvent.preventDefault()
+        let widget = window.cloudinary.createUploadWidget({
+            cloudName: `dcfiyfyfx`,
+            uploadPreset: `axwgcngu`
+        },
+            (error, result) => {
+                if (!error && result && result.event === "success") {
+                    console.log(result.info.url)
+                    setImageState(result.info.url)
+                }
+            });
+        widget.open()
     }
 
     return (
@@ -96,10 +124,25 @@ export const EditStudentProfile = () => {
                         }
                     </select>
                 </div>
-                <TextInput label="Profile Image:" placeholder={currentStudent.img} type="text" name="img" required autoFocus className="form-control"
-                    value={currentStudent.img}
-                    onChange={changeStudentState}
-                />
+                {
+                    !upload
+                        ? < Button
+                            label="Profile Image:"
+                            className="uploadButton"
+                            variant="outline"
+                            color="orangy"
+                            radius={20}
+                            onClick={(clickEvent) => showWidget(clickEvent)
+                            }> Upload Image</Button>
+                        :
+                        <Button
+                            className="uploadButton"
+                            variant="light"
+                            color="green"
+                            radius={20}
+                            onClick={(clickEvent) => showWidget(clickEvent)
+                            }> Image Upload Complete</Button>
+                }
 
                 <TextInput label="Email:" placeholder={currentStudent.email} type="text" name="email" required autoFocus className="form-control"
                     value={currentStudent.email}

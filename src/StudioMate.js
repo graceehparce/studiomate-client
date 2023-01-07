@@ -18,7 +18,7 @@ export const StudioMate = () => {
         <Route path="*" element={
             <Authorized>
                 <>
-                    <NavBar />
+                    {/* <NavBar /> */}
                     <ApplicationViews />
                 </>
             </Authorized>

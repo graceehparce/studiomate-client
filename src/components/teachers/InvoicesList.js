@@ -97,7 +97,7 @@ export const InvoicesList = () => {
                                 return <section key={`assignment--${invoice.id}`} className="invoice">
                                     <Button
                                         className="buttonList"
-                                        variant="outline"
+                                        variant="dark"
                                         color="orangy"
                                         radius={20}
                                         onClick={() => {

@@ -1,5 +1,7 @@
 import { TeacherViews } from "./TeacherViews"
 import { StudentViews } from "./StudentViews"
+import { NavBar } from "../nav/NavBar"
+
 
 
 export const ApplicationViews = () => {
@@ -8,9 +10,15 @@ export const ApplicationViews = () => {
     const SMTokenObject = JSON.parse(localSM)
 
     if (SMTokenObject.is_staff === true) {
-        return <TeacherViews />
+        return <>
+            <NavBar />
+            <TeacherViews />
+        </>
     }
     else {
-        return <StudentViews />
+        return <>
+            <NavBar />
+            <StudentViews />
+        </>
     }
 }

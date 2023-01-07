@@ -14,10 +14,27 @@ export const EditProfileForm = () => {
     const { teacherId } = useParams()
     const [currentTeacher, setCurrentTeacher] = useState({})
     const navigate = useNavigate()
+    const [upload, setImageState] = useState(false)
 
     useEffect(() => {
-        getTeacher().then(data => setCurrentTeacher(data[0]))
+        getTeacher().then(data => {
+            let teacherUser = {
+                first_name: data[0].user.first_name,
+                last_name: data[0].user.last_name,
+                phone_number: data[0].phone_number,
+                email: data[0].email,
+                img: data[0].img
+            }
+            setCurrentTeacher(teacherUser)
+        })
     }, [])
+
+    useEffect(() => {
+        let tempTeacher = currentTeacher
+        tempTeacher.img = upload
+        setCurrentTeacher(tempTeacher)
+    }, [upload])
+
 
 
     const updateTeacher = (teacher) => {
@@ -36,7 +53,29 @@ export const EditProfileForm = () => {
     const changeTeacherState = (domEvent) => {
         const newTeacher = Object.assign({}, currentTeacher)
         newTeacher[domEvent.target.name] = domEvent.target.value
-        setCurrentTeacher(newTeacher)
+        if (upload === false) {
+            setCurrentTeacher(newTeacher)
+        }
+        else {
+            newTeacher.img = upload
+            setCurrentTeacher(newTeacher)
+        }
+    }
+
+
+    const showWidget = (clickEvent) => {
+        clickEvent.preventDefault()
+        let widget = window.cloudinary.createUploadWidget({
+            cloudName: `dcfiyfyfx`,
+            uploadPreset: `axwgcngu`
+        },
+            (error, result) => {
+                if (!error && result && result.event === "success") {
+                    console.log(result.info.url)
+                    setImageState(result.info.url)
+                }
+            });
+        widget.open()
     }
 
     return (
@@ -58,11 +97,26 @@ export const EditProfileForm = () => {
                     value={currentTeacher.last_name}
                     onChange={changeTeacherState}
                 />
+                {
+                    !upload
+                        ? < Button
+                            label="Profile Image:"
+                            className="uploadButton"
+                            variant="outline"
+                            color="orangy"
+                            radius={20}
+                            onClick={(clickEvent) => showWidget(clickEvent)
+                            }> Upload Image</Button>
+                        :
+                        <Button
+                            className="uploadButton"
+                            variant="light"
+                            color="green"
+                            radius={20}
+                            onClick={(clickEvent) => showWidget(clickEvent)
+                            }> Image Upload Complete</Button>
+                }
 
-                <TextInput label="Profile Image:" placeholder={currentTeacher.img} type="text" name="img" required autoFocus className="form-control"
-                    value={currentTeacher.img}
-                    onChange={changeTeacherState}
-                />
                 <TextInput label="Email:" placeholder={currentTeacher.email} type="text" name="email" required autoFocus className="form-control"
                     value={currentTeacher.email}
                     onChange={changeTeacherState}

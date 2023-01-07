@@ -97,7 +97,7 @@ export const InvoiceProfile = () => {
                 <div className="category">Student: </div>
                 <div className="response">{invoice?.student?.full_name}</div>
                 <div className="category">Amount: </div>
-                <div className="response">{invoice.amount}</div>
+                <div className="response">${invoice.amount}</div>
                 <div className="category">Comments: </div>
                 <div className="response">{invoice.comment}</div>
                 {

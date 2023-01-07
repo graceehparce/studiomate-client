@@ -113,3 +113,7 @@
     flex-direction: column;
     justify-content: end;
 }
+
+.uploadButton {
+    margin-top: 10px;
+}

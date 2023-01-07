@@ -21,7 +21,7 @@ export const StudentNav = () => {
 
     return (
         <nav className="navbar">
-            <Link className="logoTitleLink" to="/students">
+            <Link className="logoTitleLink" to="/myStudentProfile">
                 <Image height={100} src={logo} alt="StudentImg" />
             </Link>
             <div className="navRightSection">

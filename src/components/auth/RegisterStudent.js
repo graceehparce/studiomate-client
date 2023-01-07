@@ -23,6 +23,7 @@ export const RegisterStudent = () => {
     const verifyPassword = useRef()
     const passwordDialog = useRef()
     const navigate = useNavigate()
+    const [upload, setImageState] = useState(false)
 
     useEffect(
         () => {
@@ -63,6 +64,22 @@ export const RegisterStudent = () => {
         }
     }
 
+    const showWidget = (clickEvent) => {
+        clickEvent.preventDefault()
+        let widget = window.cloudinary.createUploadWidget({
+            cloudName: `dcfiyfyfx`,
+            uploadPreset: `axwgcngu`
+        },
+            (error, result) => {
+                if (!error && result && result.event === "success") {
+                    console.log(result.info.url)
+                    img.current = result.info.url
+                    setImageState(true)
+                }
+            });
+        widget.open()
+    }
+
     return (
         <BackgroundImage src={piano} fit="contain">
             <div className="registerBox" style={{
@@ -99,7 +116,25 @@ export const RegisterStudent = () => {
                                 }
                             </select>
                         </div>
-                        <TextInput size="xs" label="Profile Image:" ref={img} type="text" name="img" className="form-control" placeholder="Img" required />
+                        {
+                            !upload
+                                ? < Button
+                                    label="Profile Image:"
+                                    className="uploadButton"
+                                    variant="outline"
+                                    color="orangy"
+                                    radius={20}
+                                    onClick={(clickEvent) => showWidget(clickEvent)
+                                    }> Upload Image</Button>
+                                :
+                                <Button
+                                    className="uploadButton"
+                                    variant="light"
+                                    color="green"
+                                    radius={20}
+                                    onClick={(clickEvent) => showWidget(clickEvent)
+                                    }> Image Upload Complete</Button>
+                        }
                         <TextInput size="xs" label="Password:" ref={password} type="password" name="password" className="form-control" placeholder="Password" required />
                         <TextInput size="xs" label="Verify Password:" ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
                         <div className="buttonArea">

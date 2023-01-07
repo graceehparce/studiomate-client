@@ -5,6 +5,7 @@ import { TextInput, Card, Image, Button, BackgroundImage } from "@mantine/core"
 import piano from "../images/bigPiano.jpg"
 import logo from "../images/Mate.png"
 import "./Login.css"
+import { useState } from "react"
 
 
 export const RegisterTeacher = () => {
@@ -18,6 +19,8 @@ export const RegisterTeacher = () => {
     const verifyPassword = useRef()
     const passwordDialog = useRef()
     const navigate = useNavigate()
+    const [upload, setImageState] = useState(false)
+
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -45,6 +48,22 @@ export const RegisterTeacher = () => {
         }
     }
 
+    const showWidget = (clickEvent) => {
+        clickEvent.preventDefault()
+        let widget = window.cloudinary.createUploadWidget({
+            cloudName: `dcfiyfyfx`,
+            uploadPreset: `axwgcngu`
+        },
+            (error, result) => {
+                if (!error && result && result.event === "success") {
+                    console.log(result.info.url)
+                    img.current = result.info.url
+                    setImageState(true)
+                }
+            });
+        widget.open()
+    }
+
     return (
         <BackgroundImage src={piano} fit="contain">
             <div className="registerBox" style={{
@@ -64,7 +83,25 @@ export const RegisterTeacher = () => {
                         <TextInput size="xs" label="Email:" ref={email} type="text" name="email" className="form-control" placeholder="Email" required />
                         <TextInput size="xs" label="Username:" ref={username} type="text" name="username" className="form-control" placeholder="Username" required />
                         <TextInput size="xs" label="Phone Number:" ref={phone_number} type="text" name="phone_number" className="form-control" placeholder="Phone number" required />
-                        <TextInput size="xs" label="Profile Image:" ref={img} type="text" name="img" className="form-control" placeholder="Img" required />
+                        {
+                            !upload
+                                ? < Button
+                                    label="Profile Image:"
+                                    className="uploadButton"
+                                    variant="outline"
+                                    color="orangy"
+                                    radius={20}
+                                    onClick={(clickEvent) => showWidget(clickEvent)
+                                    }> Upload Image</Button>
+                                :
+                                <Button
+                                    className="uploadButton"
+                                    variant="light"
+                                    color="green"
+                                    radius={20}
+                                    onClick={(clickEvent) => showWidget(clickEvent)
+                                    }> Image Upload Complete</Button>
+                        }
                         <TextInput size="xs" label="Password:" ref={password} type="password" name="password" className="form-control" placeholder="Password" required />
                         <TextInput size="xs" label="Verify Password:" ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
                         <div className="buttonArea">
