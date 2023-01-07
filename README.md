@@ -42,7 +42,7 @@ Mantine
 
 
 ##Running This Application
-###Start Client Side
+######Start Client Side
 Clone this repository and change to this directory in the terminal.
 git clone git clone git@github.com:graceehparce/studiomate-client.git
 cd studiomate-client
@@ -50,7 +50,7 @@ Start development server
 npm install --save react-router-dom
 npm start
 
-###Start Server Side
+######Start Server Side
 Clone the server repository and change to that directory in the terminal.
 git@github.com:graceehparce/studiomate-server.git
 cd studiomate-server
