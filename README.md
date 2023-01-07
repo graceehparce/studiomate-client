@@ -3,13 +3,11 @@
 StudioMate is an administrative support application created to help private music teachers communicate more efficiently and effectively with their students. 
 
 ##Application Overview
-
 As a music teacher, I always found myself scrambling, trying to remember if I emailed this person about their next lesson or whether or not that student paid me for last month. This application is dedicated to the teachers who love teaching but hate all the administrative tasks and organization required to run their own private teaching studio. Teachers can message their students, create assignments and invoices, send schedule requests and even store a body of resources they anticipate students will need in the future. It's the one-stop-shop admin app for teachers who need a little organizational support. 
 
 This project is my fullstack capstone, the culmination of a 6 month intensive full stack coding bootcamp. My goals were to explore the power of server side by incorporating complex logic on server side thereby lightening client side's responsibility. I also wanted to experiment with using a framework for my front-end styling and implement additional tools like cloudniary. 
 
 ##Features
-
 All users can create and edit their profiles
 Teachers can create assignements
 Teachers can create and update invoices
