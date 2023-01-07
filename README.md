@@ -1,14 +1,14 @@
-StudioMate
+#StudioMate
 
 StudioMate is an administrative support application created to help private music teachers communicate more efficiently and effectively with their students. 
 
-Application Overview
+##Application Overview
 
 As a music teacher, I always found myself scrambling, trying to remember if I emailed this person about their next lesson or whether or not that student paid me for last month. This application is dedicated to the teachers who love teaching but hate all the administrative tasks and organization required to run their own private teaching studio. Teachers can message their students, create assignments and invoices, send schedule requests and even store a body of resources they anticipate students will need in the future. It's the one-stop-shop admin app for teachers who need a little organizational support. 
 
 This project is my fullstack capstone, the culmination of a 6 month intensive full stack coding bootcamp. My goals were to explore the power of server side by incorporating complex logic on server side thereby lightening client side's responsibility. I also wanted to experiment with using a framework for my front-end styling and implement additional tools like cloudniary. 
 
-Features
+##Features
 
 All users can create and edit their profiles
 Teachers can create assignements
@@ -18,7 +18,7 @@ Students can update schedule requests
 All users can create messages
 Teachers can create and delete resources
 
-Technology Used
+##Technology Used
 JavaScript
 Django
 Python
@@ -41,8 +41,8 @@ Mantine
 
 
 
-Running This Application
-Start Client Side
+##Running This Application
+###Start Client Side
 Clone this repository and change to this directory in the terminal.
 git clone git clone git@github.com:graceehparce/studiomate-client.git
 cd studiomate-client
@@ -50,7 +50,7 @@ Start development server
 npm install --save react-router-dom
 npm start
 
-Start Server Side
+###Start Server Side
 Clone the server repository and change to that directory in the terminal.
 git@github.com:graceehparce/studiomate-server.git
 cd studiomate-server
@@ -69,9 +69,14 @@ To view the application as a student, please sign in using the following credent
 username: TClancy
 password: Tom
 
-Demo
+##Demo
 In the making...please check back again!
 
-ERD
+##ERD
+[StudioMate.pdf](https://github.com/graceehparce/studiomate-client/files/10366748/StudioMate.pdf)
+
+##Wireframe
+https://sketchboard.me/PDyQSOtIHev#/
+
 
 
