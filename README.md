@@ -28,21 +28,21 @@ This project is my fullstack capstone, the culmination of a 6 month intensive fu
 
 ## Running This Application 
 ###### Start Client Side 
-Clone this repository and change to this directory in the terminal. 
-git clone git@github.com:graceehparce/studiomate-client.git 
-cd studiomate-client 
-Start development server 
-npm install --save react-router-dom 
-npm start
+1. Clone this repository and change to this directory in the terminal. 
+```git clone git@github.com:graceehparce/studiomate-client.git 
+cd studiomate-client ```
+2. Start development server 
+```npm install --save react-router-dom 
+npm start```
 
 ###### Start Server Side 
-Clone the server repository and change to that directory in the terminal. 
-git clone git@github.com:graceehparce/studiomate-server.git 
-cd studiomate-server 
-Start virtual environment 
-pipenv shell 
-Start the debugger to run server 
-python manage.py shell
+1. Clone the server repository and change to that directory in the terminal. 
+```git clone git@github.com:graceehparce/studiomate-server.git 
+cd studiomate-server ```
+2. Start virtual environment 
+```pipenv shell ```
+3. Start the debugger to run server 
+```python manage.py shell```
 
 ###### Demo User Login 
 To view the application as a teacher, please sign in using the following credentials:
