@@ -30,7 +30,7 @@ This project is my fullstack capstone, the culmination of a 6 month intensive fu
 ###### Start Client Side 
 1. Clone this repository and change to this directory in the terminal. 
 ```git clone git@github.com:graceehparce/studiomate-client.git 
-cd studiomate-client ```
+cd studiomate-client```
 2. Start development server 
 ```npm install --save react-router-dom 
 npm start```
@@ -38,9 +38,9 @@ npm start```
 ###### Start Server Side 
 1. Clone the server repository and change to that directory in the terminal. 
 ```git clone git@github.com:graceehparce/studiomate-server.git 
-cd studiomate-server ```
+cd studiomate-server```
 2. Start virtual environment 
-```pipenv shell ```
+```pipenv shell```
 3. Start the debugger to run server 
 ```python manage.py shell```
 
