@@ -6,6 +6,8 @@ import { useEffect } from "react"
 import { Menu, Button, Avatar, Group } from "@mantine/core"
 import { IconUserCircle, IconSchool, IconBellRinging, IconMenu2, IconLogout, IconMail } from "@tabler/icons"
 import logo from "../images/ColoredLogo.jpg"
+import notification from "../images/Not.jpg"
+import redNot from "../images/redNot.jpg"
 
 import { Link } from "react-router-dom"
 import { Image } from "@mantine/core"
@@ -13,9 +15,25 @@ import { Image } from "@mantine/core"
 export const StudentNav = () => {
     const navigate = useNavigate()
     const [student, setStudent] = useState({})
+    const [notifications, setNotifications] = useState([])
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
 
     useEffect(() => {
         getMyStudent().then(data => setStudent(data[0]))
+    }, [])
+
+    const getNotifications = () => {
+        return fetch(`http://localhost:8000/notifications`, {
+            headers: {
+                "Authorization": `Token ${SMTokenObject.token}`
+            }
+        })
+            .then(response => response.json())
+    }
+
+    useEffect(() => {
+        getNotifications().then(data => setNotifications(data))
     }, [])
 
 
@@ -25,6 +43,20 @@ export const StudentNav = () => {
                 <Image height={100} src={logo} alt="StudentImg" />
             </Link>
             <div className="navRightSection">
+                {
+                    notifications.length > 0
+                        ?
+                        <Group position="center">
+                            <Link className="avatar" to={`/notifications/${student.id}`}>
+                                <Avatar height={100} radius="xl" src={redNot} alt="notImg" />
+                            </Link>
+                        </Group>
+                        : <Group position="center">
+                            <Link className="avatar" to={`/notifications/${student.id}`}>
+                                <Avatar height={100} radius="xl" src={notification} alt="notImg" />
+                            </Link>
+                        </Group>
+                }
                 <Link className="avatar" to="/myStudentProfile">
                     <Avatar height={100} radius="xl" src={student?.img} alt="teacherImg" />
                 </Link>
@@ -95,7 +127,7 @@ export const StudentNav = () => {
                     </Menu>
                 </section>
             </div>
-        </nav>
+        </nav >
     )
 }
 

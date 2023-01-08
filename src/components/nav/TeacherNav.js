@@ -9,6 +9,10 @@ import { getStudents } from "../managers/StudentManager"
 import { useEffect } from "react"
 import { useState } from "react"
 import { getTeacher } from "../managers/TeacherManager"
+import notification from "../images/Not.jpg"
+import redNot from "../images/redNot.jpg"
+
+
 
 
 export const TeacherNav = () => {
@@ -16,6 +20,9 @@ export const TeacherNav = () => {
     const [opened, { close, open }] = useDisclosure(false);
     const [students, setStudents] = useState([])
     const [teacher, setTeacher] = useState({})
+    const [notifications, setNotifications] = useState([])
+    const localSM = localStorage.getItem("sm_token")
+    const SMTokenObject = JSON.parse(localSM)
 
     useEffect(() => {
         getTeacher().then(data => setTeacher(data[0]))
@@ -25,6 +32,22 @@ export const TeacherNav = () => {
         getStudents().then(data => setStudents(data))
     }, [])
 
+    const getNotifications = () => {
+        return fetch(`http://localhost:8000/notifications`, {
+            headers: {
+                "Authorization": `Token ${SMTokenObject.token}`
+            }
+        })
+            .then(response => response.json())
+    }
+
+    useEffect(() => {
+        getNotifications().then(data => setNotifications(data))
+    }, [])
+
+
+
+
 
 
     return (
@@ -33,6 +56,20 @@ export const TeacherNav = () => {
                 <Image radius="xl" height={100} src={logo} alt="StudentImg" />
             </Link>
             <div className="navRightSection">
+                {
+                    notifications.length > 0
+                        ?
+                        <Group position="center">
+                            <Link className="avatar" to="/notifications">
+                                <Avatar height={100} radius="xl" src={redNot} alt="notImg" />
+                            </Link>
+                        </Group>
+                        : <Group position="center">
+                            <Link className="avatar" to="/notifications">
+                                <Avatar height={100} radius="xl" src={notification} alt="notImg" />
+                            </Link>
+                        </Group>
+                }
                 <Link className="avatar" to="/teacher">
                     <Avatar height={100} radius="xl" src={teacher?.img} alt="teacherImg" />
                 </Link>
