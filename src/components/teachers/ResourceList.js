@@ -56,15 +56,23 @@ export const ResourceList = () => {
                                     <Image src={resource.img} className="resource_img" style={{ width: '80px', height: '120px' }} />
                                     {resource.name}
                                 </a>
-                                <Button
-                                    className="resourceButton"
-                                    variant="filled"
-                                    color="orangy"
-                                    radius={20} onClick={
-                                        () => {
-                                            deleteResource(resource.id).then(() => window.location.reload())
-                                        }
-                                    }>Delete</Button>
+                                {
+                                    SMTokenObject.is_staff === true
+                                        ?
+
+                                        <Button
+                                            className="resourceButton"
+                                            variant="filled"
+                                            color="orangy"
+                                            radius={20} onClick={
+                                                () => {
+                                                    deleteResource(resource.id).then(() => window.location.reload())
+                                                }
+                                            }>Delete</Button>
+
+                                        :
+                                        ""
+                                }
                             </div>
                         </Card>
                     })

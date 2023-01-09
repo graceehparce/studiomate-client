@@ -33,7 +33,7 @@ export const RegisterTeacher = () => {
                 "last_name": last_name.current.value,
                 "phone_number": phone_number.current.value,
                 "password": password.current.value,
-                "img": img.current.value
+                "img": img.current
             }
 
             registerUser(newUser)

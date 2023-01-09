@@ -1,11 +1,12 @@
 import React, { useEffect } from "react"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useParams } from "react-router-dom"
-import { getStudent } from "../managers/StudentManager"
+import { getStudent, getStudents } from "../managers/StudentManager"
 import { Card, Button, Image } from "@mantine/core"
 import "./Notifications.css"
 import { IconCalendar, IconFileDollar, IconPencil, IconMessages, IconBellRinging } from "@tabler/icons"
+import { useReducedMotion } from "@mantine/hooks"
 
 
 export const NotificationsList = () => {
@@ -14,11 +15,28 @@ export const NotificationsList = () => {
     const [notifications, setNotifications] = useState([])
     const [student, setStudent] = useState([])
     const { studentId } = useParams()
+    const [students, setStudents] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
-        getStudent(studentId).then(data => setStudent(data))
+        if (SMTokenObject.is_staff === false) {
+            getStudent(studentId).then(data => setStudent(data))
+        }
     }, [])
 
+    useEffect(() => {
+        if (SMTokenObject.is_staff === true) {
+            getStudents().then(data => setStudents(data))
+        }
+    }, [])
+
+
+    const studentGetter = (userId) => {
+        let neededStudent = students.filter((theStudent) => {
+            return theStudent.user.id === userId
+        })
+        navigate(`/messages/${neededStudent[0].id}`)
+    }
 
     const getNotifications = () => {
         return fetch(`http://localhost:8000/notifications`, {
@@ -158,9 +176,10 @@ export const NotificationsList = () => {
                             }
                             else {
                                 return <div className="notSection">
-                                    <Link key={`notification--${notification.id}`} className="notText" to={`/students`}>
+                                    <div key={`notification--${notification?.id}`} className="notText"
+                                        onClick={() => studentGetter(notification?.sender?.id)}>
                                         <IconMessages />
-                                        You have a {notification?.notification_type?.type} notification from {notification?.sender?.first_name}</Link>
+                                        You have a {notification?.notification_type?.type} notification from {notification?.sender?.first_name}</div>
                                     <Button
                                         variant="light"
                                         color="orangy"
