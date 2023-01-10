@@ -1,5 +1,5 @@
 .backgroundSection {
-    background-image: url("../images/MorePiano.jpg");
+    background-image: url("../images/MorePiano2.jpg");
     background-size: cover;
     padding-top: 75px;
     padding-bottom: 385px;
@@ -14,4 +14,10 @@
     font-size: xx-large;
     font-weight: 700;
     margin-bottom: 10px;
+}
+
+.welcomeDes {
+    font-size: x-large;
+    font-weight: 700;
+    font-variant: small-caps;
 }

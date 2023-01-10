@@ -15,6 +15,7 @@ export const ResourceList = () => {
     const SMTokenObject = JSON.parse(localSM)
     const [showForm, setShowForm] = useState(false)
     const { teacherId } = useParams()
+    const [upload, setImageState] = useState(false)
     const [newResource, setNewResource] = useState({
         resource: "",
         img: "",
@@ -32,16 +33,40 @@ export const ResourceList = () => {
         getSingleTeacher(teacherId).then(data => setTeacher(data))
     }, [])
 
+    useEffect(() => {
+        let tempRec = newResource
+        tempRec.img = upload
+        setNewResource(tempRec)
+    }, [upload])
+
 
     const changeResourceState = (domEvent) => {
         const resource = Object.assign({}, newResource)
         resource[domEvent.target.name] = domEvent.target.value
-        setNewResource(resource)
+        if (upload === false) {
+            setNewResource(resource)
+
+        }
+        else {
+            resource.img = upload
+            setNewResource(resource)
+        }
     }
 
-
-
-
+    const showWidget = (clickEvent) => {
+        clickEvent.preventDefault()
+        let widget = window.cloudinary.createUploadWidget({
+            cloudName: `dcfiyfyfx`,
+            uploadPreset: `axwgcngu`
+        },
+            (error, result) => {
+                if (!error && result && result.event === "success") {
+                    console.log(result.info.url)
+                    setImageState(result.info.url)
+                }
+            });
+        widget.open()
+    }
 
 
     return (
@@ -108,10 +133,26 @@ export const ResourceList = () => {
                                 value={newResource.resource}
                                 onChange={changeResourceState}
                             />
-                            <TextInput label="Image:" type="text" name="img" required autoFocus className="form-control"
-                                value={newResource.img}
-                                onChange={changeResourceState}
-                            />
+                            {
+                                !upload
+                                    ? < Button
+                                        label="Profile Image:"
+                                        className="uploadButton"
+                                        variant="outline"
+                                        color="orangy"
+                                        radius={20}
+                                        onClick={(clickEvent) => showWidget(clickEvent)
+                                        }> Upload Image</Button>
+                                    :
+                                    <Button
+                                        className="uploadButton"
+                                        variant="light"
+                                        color="green"
+                                        radius={20}
+                                        onClick={(clickEvent) => showWidget(clickEvent)
+                                        }> Image Upload Complete</Button>
+                            }
+
                             <div className="buttonSection">
                                 <Button
                                     variant="light"
