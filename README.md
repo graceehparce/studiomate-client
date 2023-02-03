@@ -67,8 +67,7 @@ username: TClancy
 password: Tom
 ```
 
-## Demo In the making...please check back again!
-
+## Demo https://www.loom.com/share/a2c4b294ff3a47aa87350f77cbf8c5c8
 ## ERD [StudioMate.pdf](https://github.com/graceehparce/studiomate-client/files/10367061/StudioMate.pdf)
 
 ## Wireframe https://sketchboard.me/PDyQSOtIHev#/
